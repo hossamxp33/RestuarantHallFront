@@ -85,7 +85,7 @@
 
 .food-card-box
 {
-   height: 445px !important;
+   min-height: 445px !important;
    overflow-y: scroll;
    overflow-x: hidden;
 }
