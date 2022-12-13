@@ -9,6 +9,7 @@ import { HallComponent } from './pages/hall/hall.component';
 import { TableComponent } from './components/table/table.component';
 import { FoodCardComponent } from './components/food-card/food-card.component';
 import { CartComponent } from './components/cart/cart.component';
+import { CartFoodCardComponent } from './components/cart-food-card/cart-food-card.component';
 
 
 
@@ -28,6 +29,7 @@ import { CartComponent } from './components/cart/cart.component';
       TableComponent,
       FoodCardComponent,
       CartComponent,
+      CartFoodCardComponent,
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),

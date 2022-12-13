@@ -10,3 +10,57 @@
    text-align: center;
    
 }
+
+
+.check-all-box
+{
+   direction: rtl;
+   min-width: 346px;
+}
+
+
+.checkbox-1
+{
+   width: 33px;
+   height: 33px;
+}
+
+
+.checkbox-1:checked
+{
+   background-color: var(--bs-success);
+}
+
+
+.sections-box
+{
+   height: 535px;
+   overflow-x: hidden;
+   overflow-y: scroll;
+}
+
+.transcript-title
+{
+   font-size: 14px;
+}
+
+.btn-1
+{
+   padding: 12px 40px;
+   width: 117px;
+   height: 43px;
+   background: var(--color-4);
+   border-radius: 4px;
+}
+
+.btn-2
+{
+   padding: 12px 40px;
+   width: 117px;
+   height: 43px;
+   background: var(--color-2);
+   border-radius: 4px;
+   color: var(--color-4);
+   border-color: var(--color-4);
+   white-space: nowrap;
+}

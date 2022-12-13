@@ -7,9 +7,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
+  orders : any[] = [];
+
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+
+
+    this.orders = [
+      {
+        img: '../../../../../assets/images/burger_cart_1.svg',
+        name: 'دوبل بيف برجر',
+        size: 'صغير',
+        price: 17 
+      },
+      {
+        img: '../../../../../assets/images/burger_cart_2.svg',
+        name: 'دوبل بيف برجر',
+        size: 'صغير',
+        price: 17 
+      },
+      {
+        img: '../../../../../assets/images/burger_cart_3.svg',
+        name: 'دوبل بيف برجر',
+        size: 'صغير',
+        price: 17 
+      }
+    ];
+
+
   }
 
 }

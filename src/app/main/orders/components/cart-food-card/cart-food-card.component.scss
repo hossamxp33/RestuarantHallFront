@@ -1,0 +1,35 @@
+
+
+
+.card
+{
+   background: var(--color-2);
+   box-shadow: 0px 2px 12px 0px #74747426;
+   border: 1px solid #E1E1E1;
+   border-radius: 8px;
+}
+
+.food-size
+{
+   font-size: 14px;
+}
+
+.food-price
+{
+   color: var(--color-4);
+}
+
+.food-name
+{
+   white-space: nowrap;
+}
+
+.food-count
+{
+   font-size: 19px;
+}
+
+.count-btn , .close-btn
+{
+   cursor: pointer;
+}
