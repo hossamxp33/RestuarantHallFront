@@ -1,0 +1,91 @@
+
+
+
+
+
+
+<div class="d-flex flex flex-row-reverse h-100">
+
+
+   <!-- right -->
+   <div class="d-flex flex-column food-box">
+     
+      <!-- header -->
+      <div class="d-flex flex-column mx-5 py-4">
+         
+         <div class="border-2 border-bottom pb-3 d-flex flex-row-reverse justify-content-between">
+            <h1 class="m-0 header-title fw-bold">القائمة</h1>
+         </div>
+
+         <div class="d-flex gap-2 my-3 categories-box justify-content-start flex-row-reverse">
+            <h2 class="active px-2">برجر</h2>
+            <h2 class="px-2">أطباق جانبية</h2>
+            <h2 class="px-2">مشروبات</h2>
+            <h2 class="px-2">الحلو</h2>
+         </div>
+      
+      </div>
+   
+   
+      <!-- body -->
+      <div class="food-card-box h-100 pb-5 px-5 row row-cols-4">
+         <app-food-card *ngFor="let food of foods;" [card_img]="food"></app-food-card>
+      </div>
+
+   </div>
+
+
+   <!-- left -->
+   <div class="d-flex flex-column order-box">
+      <!-- header -->
+      <div class="border-2 border-bottom d-flex flex-column mx-5 py-4">
+         
+
+         <div class="d-flex flex-row-reverse justify-content-between">
+            <div>
+               <h1 class="m-0 header-title fw-bold">طلب #23</h1>
+            </div>
+   
+            <div class="d-flex justify-content-center align-items-center">
+               <img src="../../../../../assets/icons/QR_code.svg" alt="qr code" width="42" height="42"> 
+            </div>
+         </div>
+
+         <div class="d-flex justify-content-between mt-4">
+
+            <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+               <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
+               <h1 class="title-txt tab-title m-0">طاولة: <span>2</span></h1>
+            </div>
+   
+            <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+               <img src="../../../../../assets/icons/people_light.svg" alt="home icon" width="20" height="20">
+               <h1 class="title-txt tab-title m-0">الضيوف: <span>4</span></h1>
+            </div>
+   
+         </div>
+         
+      </div>
+   
+   
+      <!-- body -->
+      <div class="d-flex flex-column h-100">
+   
+         <div class="align-items-center d-flex flex-column gap-3 h-100 justify-content-center">
+            
+            <div>
+               <img src="../../../../../assets/icons/fast_food.svg" alt="fast food" width="143" height="143">
+            </div>
+            
+            <div>
+               <h1 class="order-txt">لم يتم إضافة منتجات بعد</h1>
+            </div>
+
+         </div>
+   
+   
+      </div>
+   </div>
+
+
+</div>

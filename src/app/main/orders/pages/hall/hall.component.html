@@ -1,0 +1,52 @@
+
+
+
+
+
+
+<div class="d-flex flex-column h-100">
+
+
+   <!-- header -->
+   <div class="border-3 border-bottom d-flex flex-row-reverse justify-content-between mx-5 py-4">
+      
+      <div>
+         <h1 class="m-0">الصالة</h1>
+      </div>
+      
+
+      <div class="d-flex gap-4 align-items-center flex-row-reverse">
+         <button class="btn floor-btn">الطابق الأول</button>
+         <button class="btn floor-btn" disabled>الطابق الثاني</button>
+      </div>
+
+   </div>
+
+
+   <!-- body -->
+   <div class="d-flex flex-column h-100">
+
+      <!-- top -->
+      <div class="p-5 table-box row row-cols-5">
+         <app-table *ngFor="let table of tables;" [table_url]="table"></app-table>
+      </div>
+
+      <!-- bottom -->
+      <div class="box-inner-2-box-1-box-2 d-flex gap-5 justify-content-end px-5">
+
+         <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+            <img src="../../../../../assets/icons/people.svg" alt="home icon" width="20" height="20">
+            <h1 class="title-txt tab-title m-0">الضيوف: <span>8</span></h1>
+         </div>
+
+         <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+            <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
+            <h1 class="title-txt tab-title m-0">الطاولات المتوفرة: <span>10</span></h1>
+         </div>
+
+      </div>
+
+   </div>
+
+
+</div>

@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+// font family
+@font-face {
+   font-family: Tajawal;
+   font-weight: bold;
+   src: url('./assets/fonts/Tajawal-Bold.ttf');
+}
+
+@font-face {
+   font-family: Tajawal;
+   font-weight: 400;
+   src: url('./assets/fonts/Tajawal-Regular.ttf');
+}
+
+
+
+
+// pre-mades
+
+:root
+{
+
+
+   --color-1: #1E1E1E;
+   --color-2: white;
+   --color-3: #f2f2f2;
+   --color-4: #E48434;
+
+}
+
+
+
+// general
+*
+{
+   box-sizing: border-box;
+}
+*:not(i, span)
+{
+   font-family: Tajawal !important;
+}
+
+html, body
+{
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   background: var(--color-1);
+}
