@@ -10,6 +10,9 @@ import { TableComponent } from './components/table/table.component';
 import { FoodCardComponent } from './components/food-card/food-card.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CartFoodCardComponent } from './components/cart-food-card/cart-food-card.component';
+import { OrdersAllComponent } from './pages/orders-all/orders-all.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
+import { OrderTableComponent } from './components/order-table/order-table.component';
 
 
 
@@ -30,6 +33,9 @@ import { CartFoodCardComponent } from './components/cart-food-card/cart-food-car
       FoodCardComponent,
       CartComponent,
       CartFoodCardComponent,
+      OrdersAllComponent,
+      OrderCardComponent,
+      OrderTableComponent,
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),

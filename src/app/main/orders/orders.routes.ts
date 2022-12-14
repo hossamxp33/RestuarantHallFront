@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { OrdersComponent } from "./orders.component";
 import { HallComponent } from "./pages/hall/hall.component";
 import { MenuComponent } from "./pages/menu/menu.component";
+import { OrdersAllComponent } from "./pages/orders-all/orders-all.component";
 
 
 
@@ -25,6 +26,10 @@ export const ORDERS_ROUTES : Routes = [
          {
             path: 'menu',
             component: MenuComponent
+         },
+         {
+            path: 'all',
+            component: OrdersAllComponent
          }
       ]
    }

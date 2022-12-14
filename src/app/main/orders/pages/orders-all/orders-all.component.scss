@@ -1,0 +1,122 @@
+
+
+
+.auth-box
+{
+   max-width: 600px;
+   width: 90%;
+}
+
+.cover_img
+{
+   width: 68%;
+}
+
+
+
+.food-box
+{
+   width: 50%;
+}
+
+.order-box
+{
+   width: 50%;
+   background: var(--color-2);
+}
+
+
+.total-price-box
+{
+   background-color: var(--color-2);
+}
+
+
+.title-txt
+{
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 19px;
+   letter-spacing: 0.02em;
+   text-align: center;
+   font-style: normal;
+}
+
+.tab-title span
+{
+   color: var(--color-4);
+}
+
+
+.order-txt
+{
+   font-size: 14px;
+   font-weight: 800;
+   line-height: 17px;
+   letter-spacing: 0em;
+   text-align: center;
+   
+}
+
+.header-title
+{
+   font-size: 30px;
+}
+
+
+.categories-box h2
+{
+   font-size: 16px;
+   line-height: 19px;
+   letter-spacing: 0em;
+   text-align: center;
+   margin: 0;
+}
+
+.categories-box h2.active
+{
+   font-weight: 700;
+}
+
+.categories-box h2.active::after
+{
+   content: '';
+   border-bottom: 3px solid var(--color-4);
+   border-radius: 4px;
+   display: block;
+   margin-top: 8px;
+}
+
+.food-card-box
+{
+   max-height: 475px !important;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+
+
+.transcript-title
+{
+   font-size: 16px;
+}
+
+.transcript-title-2
+{
+   font-size: 14px;
+}
+
+
+.transcript-price
+{
+   font-size: 22px;
+   color: var(--color-4);
+}
+
+.table-meta
+{
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 19px;
+   letter-spacing: 0em;
+   
+}

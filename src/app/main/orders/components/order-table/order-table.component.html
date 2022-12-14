@@ -1,0 +1,23 @@
+
+
+
+<table class="table dir-rtl">
+   <thead>
+     <tr>
+       <th scope="col" class="text-muted fs-6">المنتج</th>
+       <th scope="col" class="text-muted fs-6">الحجم</th>
+       <th scope="col" class="text-muted fs-6">العدد</th>
+       <th scope="col" class="text-muted fs-6">السعر</th>
+     </tr>
+   </thead>
+   <tbody>
+
+     <tr *ngFor="let order of data">
+      <td class="gap-2 d-flex align-items-center dir-rtl"> <img src="{{ image_url + order.img }}" width="36" height="36" alt="food"> <h2 class="m-0 fs-6 fw-bold">{{ order.name }}</h2></td>
+      <td class="fs-6 fw-bold">{{ order.size }}</td>
+      <td class="fs-6 fw-bold">{{ order.quantity }}</td>
+      <td class="dir-rtl fs-6 fw-bold">{{ order.price }} ر.س</td>
+     </tr>
+
+   </tbody>
+</table>

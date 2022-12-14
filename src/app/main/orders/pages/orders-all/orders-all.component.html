@@ -1,0 +1,136 @@
+
+
+
+
+
+
+<div class="d-flex flex flex-row-reverse h-100">
+
+
+   <!-- right -->
+   <div class="d-flex flex-column food-box">
+     
+      <!-- header -->
+      <div class="d-flex flex-row-reverse justify-content-between align-items-center mx-5 py-4 border-2 border-bottom pb-3">
+         
+         <div class="d-flex flex-row-reverse justify-content-between">
+            <h1 class="m-0 header-title fw-bold">الطلبات</h1>
+         </div>
+         
+
+         <div>
+            <input type="date" class="border border-1 border-dark fs-5 px-3 py-2 rounded-3">
+         </div>
+      
+      </div>
+   
+   
+      <!-- body -->
+      <div class="d-flex flex-column h-100 justify-content-between">
+
+         <!-- top -->
+         <div class="food-card-box p-4 table-box row row-cols-1 gap-4">
+            <app-order-card 
+            *ngFor="let order of orders;" 
+            [order_number]="order.order_number"
+            [table_number]="order.table_number"
+            [guests_number]="order.guests_number"
+            [total]="order.total"
+            >
+            </app-order-card>
+         </div>
+
+         <!-- bottom -->
+         <div class="total-price-box d-flex gap-5 justify-content-end px-5 py-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-row-reverse w-100">
+               <h2 class="m-0 transcript-title fw-bold">المجموع الكلي</h2>
+               <h2 class="m-0 transcript-price dir-rtl fw-bold">286 ر.س</h2>
+            </div>
+
+
+         </div>
+
+
+      </div>
+
+   </div>
+
+
+   <!-- left -->
+   <div class="d-flex flex-column order-box mt-5">
+      <!-- header -->
+      <div class="border-2 border-bottom d-flex flex-column ms-5 me-3 py-4">
+         
+
+         <div class="d-flex flex-row-reverse justify-content-between">
+            <div>
+               <h1 class="m-0 header-title fw-bold">طلب #10</h1>
+            </div>
+         </div>
+
+         <div class="d-flex justify-content-start mt-5 flex-row-reverse gap-5">
+
+            <div class="d-inline-flex gap-2 flex-column align-items-center">
+               <h1 class="table-meta text-muted m-0">الطاولة</h1>
+               <i class="font-style-normal fw-bold fs-6">12</i>
+            </div>
+
+            <div class="d-inline-flex gap-2 flex-column align-items-center">
+               <h1 class="table-meta text-muted m-0">الضيوف</h1>
+               <i class="font-style-normal fw-bold fs-6">2</i>
+            </div>
+
+            <div class="d-inline-flex gap-2 flex-column align-items-center">
+               <h1 class="table-meta text-muted m-0">وسيلة الدفع</h1>
+               <i class="font-style-normal fw-bold fs-6">البطاقات الائتمانية</i>
+            </div>
+   
+         </div>
+
+
+         <div class="mt-4">
+            <h1 class="fs-5 fw-bold m-0 text-end">تفاصيل الطلب</h1>
+         </div>
+
+         <div class="mt-4">
+            <h1 class="fs-5 fw-bold m-0 text-end">
+               <app-order-table [data]="order_details">
+               </app-order-table>
+            </h1>
+         </div>
+
+         <div class="d-flex flex-column gap-2 me-3 ms-5 my-4 pb-4 mt-0">
+      
+            <div class="d-flex justify-content-between align-items-center flex-row-reverse">
+               <h2 class="m-0 transcript-title-2">المجموع</h2>
+               <h2 class="m-0 transcript-title-2 dir-rtl">100 ر.س</h2>
+            </div>
+   
+            <div class="d-flex justify-content-between align-items-center flex-row-reverse">
+               <h2 class="m-0 transcript-title-2">الضريبة</h2>
+               <h2 class="m-0 transcript-title-2 dir-rtl">10 ر.س</h2>
+            </div>
+   
+            <div class="divider border-bottom border-1 border-dark"></div>
+   
+            <div class="d-flex justify-content-between align-items-center flex-row-reverse">
+               <h2 class="m-0 transcript-title fw-bold">المجموع</h2>
+               <h2 class="m-0 transcript-title dir-rtl fw-bold">110 ر.س</h2>
+            </div>
+
+   
+         </div>
+
+         
+      </div>
+   
+   
+      <!-- body -->
+      <div class="h-100">
+      </div>
+
+   </div>
+
+
+</div>
