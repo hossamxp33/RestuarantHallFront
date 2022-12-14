@@ -10,6 +10,9 @@ export class OrdersAllComponent implements OnInit {
 
   orders : any[] = [];
   order_details : any[] = [];
+  orders_date : Date = new Date();
+  
+
 
   constructor() { }
 
@@ -83,4 +86,9 @@ export class OrdersAllComponent implements OnInit {
 
   }
 
+
+  
+
 }
+
+

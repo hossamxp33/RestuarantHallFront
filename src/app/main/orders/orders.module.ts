@@ -13,6 +13,7 @@ import { CartFoodCardComponent } from './components/cart-food-card/cart-food-car
 import { OrdersAllComponent } from './pages/orders-all/orders-all.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderTableComponent } from './components/order-table/order-table.component';
+import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 
 
 
@@ -35,7 +36,8 @@ import { OrderTableComponent } from './components/order-table/order-table.compon
       CartFoodCardComponent,
       OrdersAllComponent,
       OrderCardComponent,
-      OrderTableComponent
+      OrderTableComponent,
+      OrderDetailComponent
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),

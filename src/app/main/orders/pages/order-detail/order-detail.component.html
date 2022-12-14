@@ -1,0 +1,254 @@
+
+
+
+
+<div class="border d-flex justify-content-center outer-box position-absolute shadow start-50 top-50 translate-middle w-100">
+
+   <div class="align-items-center container d-flex justify-content-center p-0 p-lg-4 pop-up-container row w-100" #printed_material>
+      <div class="row d-flex justify-content-center align-items-start p-0">
+         
+         
+
+         
+
+         <!-- right -->
+         <div  class="col-12 col-md-6 deatil-description-item d-flex flex-column justify-content-start align-items-start p-0 dir-rtl pe-4">
+            
+
+            <!-- <div
+            class="detail-item p-0 d-flex gap-2 w-100 justify-content-between mb-md-3">
+            <p style="width: 100%" class=" fs-14 mb-1 fw-normal">{{"العنوان"}}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{ orderDetails?.billing_address?.address || "N/A" }}
+            </p>
+            </div> -->
+<!-- 
+            <div
+            class="detail-item p-0 d-flex gap-2 w-100 justify-content-between mb-md-3">
+            <p style="width: 100%" class=" fs-14 mb-1 fw-normal">{{"رقم الطابق" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{ orderDetails?.billing_address?.floor_number || "N/A" }}
+            </p>
+            </div>
+
+
+
+            <div
+               class="detail-item p-0 d-flex gap-2 w-100 justify-content-between mb-md-3">
+               <p style="width: 100%" class=" fs-14 mb-1 fw-normal">{{"رقم الشقة" }}:</p>
+               <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{ orderDetails?.billing_address?.apartment_number || "N/A" }}
+               </p>
+            </div>
+ -->
+
+
+
+
+            <div
+            class="detail-item p-0 d-flex gap-2 w-100 justify-content-between mb-3">
+            <p style="width: 100%" class="fs-14 mb-1 fw-normal">{{"التلفون" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{ orderDetails?.billing_address?.phone || "N/A" }}</p>
+            </div>
+
+         </div>
+
+
+         
+         <!-- left -->
+         <div class="col-12 col-md-6 deatil-description-item d-flex flex-column justify-content-start align-items-start p-0 dir-rtl">
+         
+            <div
+            class="p-0 d-flex gap-2 detail-item w-100 justify-content-between">
+            <p style="width: 100%" class="fs-14 mb-1 fw-normal">{{"رقم الطلب" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{ orderDetails?.order_details[0].orderId }}
+            </p>
+            </div>
+
+
+            <div
+            class="p-0 detail-item d-flex gap-2 w-100 justify-content-between">
+            <p style="width: 100%" class="fs-14 mb-1 fw-normal">
+               {{"مطعم" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{orderDetails?.ResName}}
+            </p>
+            </div>
+
+
+            <div
+            class="p-0 detail-item d-flex gap-2 w-100 justify-content-between">
+            <p style="width: 100%" class="fs-14 mb-1 fw-normal">{{"وسيلة الدفع" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{  orderDetails?.paymenttype?.name }}
+            </p>
+            </div>
+
+            
+
+            <div class="p-0 detail-item d-flex gap-2 w-100 justify-content-between">
+            <p style="width: 100%" class="fs-14 mb-1 fw-normal">
+               {{"توقيت الشراء" }}:</p>
+            <p style="width:100%" class="fs-14 text-start mb-1 fw-semibold">
+               {{orderDetails?.created | date: "medium"}}
+            </p>
+            </div>
+
+         </div>
+
+
+
+
+         <table class="table table-light table-hover mb-3 dir-rtl mt-3">
+
+            <thead>
+            <tr class="fs-14">
+
+               <th class="fw-semibold" scope="col">
+                  {{"طلب" }}
+               </th>
+
+               <th class="fw-semibold text-center" scope="col">
+                  {{"ملاحظة" }}
+               </th>
+
+               <th class="fw-semibold text-center" scope="col">
+                  {{"كمية" }}
+               </th>
+
+               <th class="fw-semibold text-center" scope="col">
+                  {{"الاجمالي" }}
+               </th>
+            </tr>
+            </thead>
+
+            <tbody class="fs-14">
+
+            <tr *ngFor="let order of orderDetails?.order_details">
+               <td class="p-1">
+                  <p class="mb-0">
+                  {{   order?.menu_categories_items?.name }} 
+                  <br>
+                  </p>
+               </td>
+               <td class="p-1 text-center"> <span class="d-inline-block text-truncate modal-order-note">{{ order?.notes || "N/A" }}</span> </td>
+               <td class="p-1 text-center"> {{order?.amount}} </td>
+               <td class="p-1 text-center dir-rtl">
+                  {{ +order?.total }}
+                  {{"ر.س"  }} 
+               </td>
+            </tr>
+            
+            </tbody>
+
+         </table>
+
+
+
+         <div class="align-items-start d-flex dir-rtl flex-column px-0 row">
+            
+            <div
+            class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p class="lh-sm m-0 fw-semibold fs-14">{{"الصافي"  }}
+            </p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+               <p class="m-0 fs-14 fw-semibold">{{subTotal  }}</p>
+               <p class="m-0 fw-normal fs-14">{{"ر.س"   }}</p>
+            </div>
+            </div>
+
+
+            <!-- <div
+            class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p class="lh-sm m-0 fw-semibold fs-14">{{"تكلفة التوصيل" }}</p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+               <p class="m-0 fs-14 fw-semibold">
+                  {{orderDetails?.delivery_serivce}}
+               </p>
+               <p class="m-0 fw-normal fs-14">{{"ر.س" }}</p>
+            </div>
+            </div> -->
+
+
+            <div class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            
+            <p class="lh-sm m-0 fw-semibold fs-14">{{"الضرائب" }}</p>
+            
+            <div style="width: 30%" class="d-flex justify-content-between">
+               
+               <p class="m-0 fs-14 fw-semibold">
+                  {{orderDetails?.taxes}}
+               </p>
+
+               <p class="m-0 fw-normal fs-14">{{"ر.س"  }}</p>
+            
+            </div>
+
+            </div>
+
+
+            <div
+            class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p style="color: red" class="lh-sm m-0 fw-semibold fs-14">
+               {{"تخفيض الكوبون"  }}</p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+               <p class="m-0 fs-14 fw-semibold">{{orderDetails?.discount}}
+               </p>
+               <p class="m-0 fw-normal fs-14">{{"ر.س" }}</p>
+            </div>
+            </div>
+
+<!-- 
+            <div class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p class="lh-sm m-0 fw-semibold fs-14">{{"تخفيض المحفظة"  }}</p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+            <p class="m-0 fs-14 fw-semibold">
+               {{orderDetails?.wallet_discount}}
+            </p>
+            <p class="m-0 fw-normal fs-14">{{"ر.س" }}</p>
+            </div>
+            </div>
+
+
+            <div class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p class="lh-sm m-0 fw-semibold fs-14">{{"تخفيض البرومو كود" }}</p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+               <p class="m-0 fs-14 fw-semibold">
+                  {{orderDetails?.offer_discount}}
+               </p>
+               <p class="m-0 fw-normal fs-14">{{"ر.س"  }}</p>
+            </div>
+            </div> -->
+
+
+            <div
+            class="col-12 col-md-6 d-flex justify-content-between align-items-center p-0">
+            <p class="lh-sm m-0 fw-bold fs-16">{{"الاجمالي"  }}</p>
+            <div style="width: 30%" class="d-flex justify-content-between">
+               <p class="m-0 fs-16 fw-semibold">{{orderDetails?.total }}</p>
+               <p class="m-0 fw-semibold fs-16">{{"ر.س"  }}</p>
+            </div>
+            </div>
+         </div>
+
+
+      </div>
+   </div>
+
+   <div class="end-0 position-absolute print-btn-box">
+      <button class="border border-1 border-dark btn btn-warning d-flex fw-bold gap-2 print-btn" (click)="print_transcript(printed_material);">
+         <img src="../../../../../assets/icons/printer.png" alt="print" width="28" height="28"> 
+         اطبع
+      </button>
+   </div>
+
+</div>
+
+
+
+
+<div class="position-absolute return-box">
+   <button class="fs-4 fw-bold mb-0 px-3 py-2" type="button" routerLink="/orders/all">الرجوع الي التطبيق</button>
+</div>
