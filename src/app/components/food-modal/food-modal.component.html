@@ -1,0 +1,157 @@
+
+
+
+
+<div *ngIf="is_modal_active" class="align-items-center d-flex food-modal-box justify-content-center overflow-hidden position-fixed start-50 top-50 translate-middle w-100 h-100" (click)="modal_overlay_clicked($event)">
+
+
+  
+  <div class="bg-white food-modal position-relative">
+
+    
+    <!-- close btn -->
+    <button (click)="exit_food_modal()" type="button" class="bg-light border border-3 btn-close end-0 fs-6 me-3 mt-3 opacity-100 p-2 position-absolute rounded-5 top-0 shadow-none" aria-label="Close" style="z-index: 99;"></button>
+
+    <!-- cover-img -->
+    <div class="modal-header modal-bg p-0 rounded-0 food-modal-img-box">
+      <img src="{{ modalContent.photo ? URL + modalContent?.photo : '../../../../../../../assets/img/img-placeholder.png' }}" class="w-100 h-100">
+    </div>
+    
+    <div class="modal-body px-5" style="overflow-x: hidden;">
+
+
+
+      <!-- title -->
+      <div class="customize-meta border-bottom-0 mb-0 food-modal-title-box pb-2">
+
+
+        <div class="d-flex justify-content-between">
+          <h4 class="customize-title fw-700 mb-0">  
+            {{ modalContent?.name }}
+          </h4>
+          
+          <div class="align-items-center bg-danger d-flex flex-column justify-content-between p-3 rounded-circle text-center text-uppercase text-white" style="width: 70px; height: 70px;">
+            <p class="m-0 p-0">{{"Total "}}</p>
+            <p class="m-0 p-0 fw-bold" style="color: var(--primary-color); margin-top: -5px !important;">{{total_price}}</p>
+          </div>
+        </div>
+
+        <p class="d-inline-block text-truncate" style="width: 250px">{{ modalContent?.description }}</p>
+
+      </div>
+
+
+      <div class="border-top-0 customize-controls food-modal-price-box flex-row-reverse pt-0 pb-1 pb-lg-3">
+
+        <!-- counter -->
+        <div class="qty h5">
+
+          <span (click)="changeQty('-')" class="qty-subtract" style="color: var(--primary-color); cursor: pointer;">
+            <i class="fas fa-minus fs-6"></i>
+            <!-- <i class="fs-2 user-select-none">-</i> -->
+          </span>
+
+          <input type="text" name="qty" [value]="qty" onfocus="blur()" />
+
+          <span (click)="changeQty('+')" class="qty-add" style="color: var(--primary-color); cursor: pointer;">
+            <i class="fas fa-plus fs-6"></i>
+            <!-- <i class="fs-2 user-select-none">+</i> -->
+          </span>
+
+        </div>
+
+        <!-- price -->
+        <div class="customize-total">
+          <div class="d-flex flex-column w-700 gap-1 h4 total-Price">
+            <div class="d-flex w-700 gap-1 h4 total-Price"  *ngIf="base_price != 0">
+              <span> {{"EGP"}} </span>
+              <span class="final-price" style="color: var(--primary-color);">{{ base_price }} </span>
+            </div>
+            <span class="fs-12 text-muted" *ngIf="base_price == 0"> * {{"depend on choice"}} </span>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="customize-variations">
+        <div class="row">
+
+          <!-- options  -->
+          <div class="col-lg-4 col-12 w-100" *ngFor="let topic of modalContent?.menu_options_topics" style="background-color: white;">
+
+            <!-- single option -->
+            <div class="customize-variation-wrapper w-100 p-0" style="background-color: white;">
+
+              <h5 class="align-items-center d-flex fw-700 h4 justify-content-between">
+                
+                <!-- name -->
+                <span class="text-capitalize m-0 p-0">{{ topic?.name }}</span>
+                
+                <!-- required stat -->
+                <div class="me-0" class="'red'" *ngIf="topic?.required">{{"Required"}}
+                </div>
+                <div class="me-0" class="'geekblue'" *ngIf="!(topic?.required)">{{"Optional"}}
+                </div>
+              
+              </h5>
+
+              <!-- START : single option types -->
+              <div class="customize-variation-item" *ngFor="let option of topic?.menu_options">
+
+                <div class="custom-control flex-row d-flex w-100 food-modal-spec-box" [ngClass]=" 'custom-' + (topic?.max_option_checks > 1 ? 'checkbox' : 'radio') ">
+                  
+                  <input
+                    [type]="topic?.max_option_checks > 1 ? 'checkbox' : 'radio'"
+                    [id]="option?.id" 
+                    [name]="topic?.max_option_checks > 1 ? option?.name : topic?.name"
+                    [value]="option?.price"
+                    [disabled]="disabledOption(topic, option)"
+                    class="custom-control-input"
+                    (change)="changeOptions($event, option, topic )"
+                  />
+
+                  <div class="align-items-center d-flex justify-content-between price w-100">
+
+                    <label class="custom-control-label fs-5 mb-0 ms-2 fw-bold text-truncate food-modal-spec-title" [for]="option?.name + 1">
+                      {{ option?.name }}
+                    </label>
+
+                    <span class="fs-4" style="color: var(--primary-color);">+ {{ option?.price }}</span>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <!-- END : single option types -->
+
+            </div>
+
+          </div>
+
+
+          <!-- note -->
+          <label class="col-md-12 fw-700 h5" for="">{{ 'Notes :' }}</label>
+          <div class="col-md-12 food-modal-text-note">
+            <textarea name="note" rows="3" style="resize: none;" maxlength="200"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- order btn -->
+      <button class="border-0 btn-block btn-outline-secondary fs-6 rounded-2 text-white w-100 order-btn" style="background: var(--primary-color);"
+        (click)="order(modalContent)">
+        {{ 'Order Now' }}
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+</div>

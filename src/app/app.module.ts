@@ -4,10 +4,12 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
+import { FoodModalComponent } from './components/food-modal/food-modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FoodModalComponent
   ],
   imports: [
     BrowserModule,

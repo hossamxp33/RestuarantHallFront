@@ -1,0 +1,96 @@
+
+
+
+.food-modal-box
+{
+    z-index: 999;
+    background: rgb(0 0 0 / 50%);
+}
+
+.food-modal
+{
+    max-width: 600px;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    z-index: 11;
+}
+
+
+/* width */
+.food-modal::-webkit-scrollbar 
+{
+    width: 10px;
+}
+  
+/* Track */
+.food-modal::-webkit-scrollbar-track 
+{
+    background: #f1f1f1;
+}
+
+/* Handle */
+.food-modal::-webkit-scrollbar-thumb 
+{
+    background: #888;
+}
+
+/* Handle on hover */
+.food-modal::-webkit-scrollbar-thumb:hover 
+{
+    background: #555;
+}
+
+.food-modal-spec-title
+{
+    max-width: 300px;
+    width: 100%;
+}
+
+
+
+.food-modal-img-box
+{
+    height: 300px;
+}
+
+
+.food-modal-text-note
+{
+  margin-bottom: 48px;
+}
+
+
+
+@media screen and (max-width: 992px)
+{
+
+    .btn-close 
+    {
+        z-index: 99;
+    }
+
+
+    .food-modal
+    {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    .food-modal-spec-title
+    {
+        max-width: 150px;
+        width: 100%;
+    }
+
+
+    .food-modal-img-box
+    {
+        height: 250px;
+    }
+    
+}

@@ -35,7 +35,7 @@ import { OrderTableComponent } from './components/order-table/order-table.compon
       CartFoodCardComponent,
       OrdersAllComponent,
       OrderCardComponent,
-      OrderTableComponent,
+      OrderTableComponent
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),
