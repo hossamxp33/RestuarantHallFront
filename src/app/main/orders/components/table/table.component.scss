@@ -10,7 +10,18 @@
 
 .table-img:hover
 {
-   filter: brightness(1.1) drop-shadow(1px 11px 0px black);
-   transition: transform 0.6s;
-   transform: scale(1.5) rotateX(45deg);
+   animation-name: table_display;
+   animation-duration: 1.3s;
+   animation-timing-function: ease;
+   animation-direction: alternate;
+   animation-fill-mode: both;
+   animation-iteration-count: 2;
+}
+
+
+
+@keyframes table_display
+{
+   from {transform: scale(1) rotateX(0deg); filter: brightness(1);}
+   to {transform: scale(1.5) rotateX(45deg); filter: brightness(1.1) drop-shadow(1px 11px 0px black);}
 }

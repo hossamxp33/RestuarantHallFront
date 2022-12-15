@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { GraphQLService } from 'src/app/core/services/graphql.service';
+import { GET_BILLING_DATA } from '../../query/orders.query';
+
+
+
 
 @Component({
   selector: 'app-hall',
@@ -10,7 +15,11 @@ export class HallComponent implements OnInit {
 
   tables: string[] = [];
 
-  constructor() { }
+  temp : any[] = [];
+
+  constructor(
+    private query_s: GraphQLService
+  ) { }
 
   ngOnInit(): void 
   {
@@ -32,6 +41,26 @@ export class HallComponent implements OnInit {
     ];
 
 
+    this.get_hall_tables_from_apollo();
+
   }
+
+
+
+  get_hall_tables_from_apollo()
+  {
+    
+    this.query_s.query(GET_BILLING_DATA).subscribe(
+      (data : any)=>{
+        console.log("🎅🏻🍾🎈we got data from graphQL 🥳🥂 🎈: " , data);
+      },
+      (err)=>{
+        console.error(err);
+      }
+    );
+  
+  }
+
+
 
 }
