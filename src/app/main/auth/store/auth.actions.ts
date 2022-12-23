@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { SignInBtnClickStatus, UserInterface } from "src/app/core/interfaces/auth.interface";
+import { UserInterface } from "src/app/core/interfaces/auth.interface";
 
 
 

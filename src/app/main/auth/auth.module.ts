@@ -5,10 +5,6 @@ import { SharedModule } from "src/app/core/modules/shared.module";
 import { AUTH_ROUTES } from "./auth.routes";
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { AuthComponent } from './auth.component';
-import { StoreModule } from "@ngrx/store";
-import { Auth_REDUCER } from "./store/auth.reducers";
-import { EffectsModule } from "@ngrx/effects";
-import { AuthEffects } from "./store/auth.effects";
 
 
 
@@ -27,9 +23,7 @@ import { AuthEffects } from "./store/auth.effects";
   ],
    imports: [
       RouterModule.forChild(AUTH_ROUTES),
-      SharedModule,
-      StoreModule.forFeature('auth' , Auth_REDUCER),
-      EffectsModule.forFeature([AuthEffects])
+      SharedModule
    ],
    exports: []
 })

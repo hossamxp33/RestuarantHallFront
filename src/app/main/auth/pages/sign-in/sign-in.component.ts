@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { GraphQLService } from 'src/app/core/services/graphql.service';
 import { SIGN_IN_QUERY } from '../../graph/auth.query';
 import { sign_in_action } from '../../store/auth.actions';
-import { AUTH_SELECTORS } from '../../store/auth.selectors';
 
 @Component({
   selector: 'app-sign-in',
@@ -34,10 +33,6 @@ export class SignInComponent implements OnInit {
 
     // craete sign-in form
     this.create_form();
-
-
-    // subscribe to user sign-in state
-    this.check_user_signed_in();
 
   }
 
@@ -89,18 +84,6 @@ export class SignInComponent implements OnInit {
       }
     );
 
-
-  }
-
-
-
-
-  check_user_signed_in()
-  {
-
-    this.store.pipe( select(AUTH_SELECTORS) ).subscribe(
-      (data)=>{ console.log(data); }
-    );
 
   }
 

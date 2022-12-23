@@ -62,7 +62,7 @@ export class AuthEffects
                   CookieService.delete_cookie("user");
                
                   // redirect to sign-in page
-                  this.router.navigateByUrl("/auth/sign-in");
+                  this.router.navigateByUrl("/");
                
                })
             );

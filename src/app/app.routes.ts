@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { AuthGuard } from "./core/guards/auth.guard";
 
 
 
@@ -15,6 +16,7 @@ export const APP_ROUTES : Routes = [
    },
    {
       path: 'orders',
-      loadChildren: ()=>import('./main/orders/orders.module').then((f)=>f.OrdersModule)
+      loadChildren: ()=>import('./main/orders/orders.module').then((f)=>f.OrdersModule),
+      canActivate: [ AuthGuard ]
    }
 ];

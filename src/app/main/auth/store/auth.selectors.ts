@@ -1,11 +1,15 @@
 import { createSelector } from "@ngrx/store";
+import { AppStates } from "src/app/core/interfaces/app.interface";
+import { AuthState } from "src/app/core/interfaces/auth.interface";
 
 
 
 
 
 
-export const AUTH_SELECTORS = createSelector( 
-   (app_state : any)=>app_state.auth.user , 
-   (data)=>{ return data; }
+export const USER_SELECTOR = createSelector( 
+   (app_state : AppStates)=>app_state.auth, 
+   (data : AuthState)=>{ 
+      return data.user; 
+   }
 );
