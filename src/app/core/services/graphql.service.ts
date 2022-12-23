@@ -16,24 +16,21 @@ export class GraphQLService
       private apollo: Apollo
    ){}
 
-   query(query_string : DocumentNode , body : any = '')
+   query(query_string : DocumentNode)
    {
+      return this.apollo.watchQuery({
+         query: query_string
+      }).valueChanges;
+   
+   }
 
-      if ( body != '' )
-      {
-         return this.apollo.watchQuery({
-            query: query_string,
-            variables: body
-         }).valueChanges;
-      }
-      else
-      {
-         return this.apollo.watchQuery({
-            query: query_string
-         }).valueChanges;
-      }
-
-
+   mutate(query_string : DocumentNode , variables: any)
+   {
+      return this.apollo.mutate({
+         mutation: query_string,
+         variables: variables
+      });
+   
    }
 
 

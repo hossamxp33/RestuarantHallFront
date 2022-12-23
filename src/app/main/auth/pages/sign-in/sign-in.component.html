@@ -15,21 +15,21 @@
 
 
    <div>
-      <form>
+      <form [formGroup]="sign_in_form">
 
          <div class="form-floating">
-           <input type="text" class="form-control" id="username" placeholder="اسم المستخدم">
+           <input type="text" class="form-control" id="username" placeholder="اسم المستخدم" formControlName="username">
            <label for="username">اسم المستخدم</label>
          </div>
 
          <div class="form-floating mt-1">
-           <input type="password" class="form-control" id="password" placeholder="كلمة المرور">
+           <input type="password" class="form-control" id="password" placeholder="كلمة المرور" formControlName="password">
            <label for="password">كلمة المرور</label>
          </div>
      
          <button class="w-100 btn btn-lg text-white mt-3 sign-in-btn shadow-0" type="button" (click)="sign_in();">تسجيل الدخول</button>
 
-       </form>
+      </form>
    </div>
 
 
