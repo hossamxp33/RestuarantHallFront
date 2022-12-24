@@ -1,6 +1,7 @@
 
 
 
-<div class="align-items-center col d-flex justify-content-center h-100 p-3">
-   <img src="{{ img_url + table_url }}" alt="table" class="img-fluid table-img" routerLink="/orders/menu">
+<div class="align-items-center col d-flex justify-content-center h-100 p-3 position-relative table-box" (click)="table_clicked();">
+   <span class="fs-4 fw-bold position-absolute start-50 top-50 translate-middle table-number">{{ table_number }}</span>
+   <img src="{{ table_seats | table_kind }}" alt="table" class="img-fluid table-img">
 </div>

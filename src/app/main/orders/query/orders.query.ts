@@ -1,14 +1,16 @@
 import gql from "graphql-tag";
+import { environment } from "src/environments/environment";
 
 
 
 
-export const GET_BILLING_DATA = gql`
-query {
-  billingAddress{
-     address
-     floor_number
-     apartment_number
+export const GET_HALL_TABLE_QUERY = gql`
+  {
+    restables(branch_id: ${environment.branch_id}) 
+    {
+      id
+      number
+      seats
+    }
   }
-}
 `;

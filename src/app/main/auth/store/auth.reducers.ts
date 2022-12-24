@@ -1,6 +1,6 @@
 
 import { createReducer, on } from "@ngrx/store";
-import { sign_in_action } from "./auth.actions";
+import { sign_in_action, sign_out_action } from "./auth.actions";
 import { Auth_STATES } from "./auth.init";
 
 
@@ -13,8 +13,9 @@ export const Auth_REDUCER = createReducer(
    on(
       sign_in_action, 
       (state, action)=>{
-      
-         console.log(state);
+
+         console.log("🧜🏻‍♂️ : " , state);
+         
 
          return {
             ...state,
@@ -25,5 +26,21 @@ export const Auth_REDUCER = createReducer(
             } 
          };
       }
+   ),
+   on(
+      sign_out_action,
+      (state , action)=>{
+
+         return {
+            ...state,
+            user: {
+               BranchId: '',
+               token: '',
+               vendorId: ''
+            }
+         };
+
+      }
    )
+   
 );

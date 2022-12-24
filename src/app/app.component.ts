@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthState, UserInterface } from './core/interfaces/auth.interface';
+import { AuthState } from './core/interfaces/auth.interface';
 import { CookieService } from './core/services/cookie.service';
 import { sign_in_action } from './main/auth/store/auth.actions';
 
@@ -29,8 +29,7 @@ export class AppComponent implements OnInit
   {
 
     let temp = CookieService.get_cookie("user");
-    console.log(temp);
-    
+
     if ( temp )
     {
       this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }))

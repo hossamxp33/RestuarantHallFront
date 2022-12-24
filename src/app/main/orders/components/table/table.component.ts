@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table',
@@ -7,12 +8,33 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  @Input('table_url') table_url : string = '';
-  img_url : string = '';
+  @Input('table_seats') table_seats : number = 1;
+  @Input('table_number') table_number : number = 1;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
+
+
+
+  table_clicked()
+  {
+
+
+    // add order
+        
+
+
+    // redirect to menu view
+    this.router.navigateByUrl('/orders/menu');
+  
+  }
+
+
+
+
 
 }

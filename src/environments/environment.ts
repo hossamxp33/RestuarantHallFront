@@ -3,11 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-
+let domain = "https://satatechnologygroup.net";
 
 export const environment = {
   production: false,
-  base_url: 'https://satatechnologygroup.net:1111/api'
+  base_url: `${domain}:1111/api`,
+  graph_url: `${domain}:1112/graphql`,
+  restaurant_id: 247,
+  branch_id: 183
 };
 
 

@@ -2,13 +2,13 @@
 
 
 
-.table-img
+.table-img , .table-number
 {
    cursor: pointer;
 }
 
 
-.table-img:hover
+.table-box:hover
 {
    animation-name: table_display;
    animation-duration: 1.3s;
