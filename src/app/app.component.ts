@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthState } from './core/interfaces/auth.interface';
-import { CookieService } from './core/services/cookie.service';
 import { sign_in_action } from './main/auth/store/auth.actions';
 
 @Component({
@@ -14,7 +14,8 @@ export class AppComponent implements OnInit
 
 
   constructor(
-    private store: Store<AuthState>
+    private store: Store<AuthState>,
+    private cookie_s: CookieService
   ){}
 
   ngOnInit(): void 
@@ -28,12 +29,15 @@ export class AppComponent implements OnInit
   check_user_status()
   {
 
-    let temp = CookieService.get_cookie("user");
+    let temp = this.cookie_s.get('user');
+
+    console.log("🍪 cookie exist ? " , temp);
 
     if ( temp )
     {
-      this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }))
+      this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }));
     }
+
 
   }
 

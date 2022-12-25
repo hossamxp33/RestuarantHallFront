@@ -1,8 +1,8 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
-import { CookieService } from "../services/cookie.service";
 
 
 
@@ -16,6 +16,10 @@ import { CookieService } from "../services/cookie.service";
 export class AuthInterceptor implements HttpInterceptor
 {
 
+   constructor(
+      private cookie_s: CookieService
+   ){}
+
 
    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> 
    {
@@ -23,8 +27,8 @@ export class AuthInterceptor implements HttpInterceptor
       if (request.url.startsWith(environment.base_url) || request.url.startsWith(environment.graph_url)) 
       {
 
-         let user = CookieService.get_cookie('user');
-         let lang = CookieService.get_cookie('lang');
+         let user = this.cookie_s.get('user');
+         let lang = this.cookie_s.get('lang');
 
         if (user)
         {

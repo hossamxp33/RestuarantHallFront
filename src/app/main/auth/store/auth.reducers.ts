@@ -13,10 +13,7 @@ export const Auth_REDUCER = createReducer(
    on(
       sign_in_action, 
       (state, action)=>{
-
-         console.log("🧜🏻‍♂️ : " , state);
          
-
          return {
             ...state,
             user: {

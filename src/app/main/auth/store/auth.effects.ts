@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { CookieService } from "ngx-cookie-service";
 import { tap } from "rxjs";
-import { CookieService } from "src/app/core/services/cookie.service";
 import { sign_in_action, sign_out_action } from "./auth.actions";
 
 
@@ -18,7 +18,8 @@ export class AuthEffects
 
    constructor(
       private actions$: Actions,
-      private router: Router
+      private router: Router,
+      private cookie_s: CookieService
    )
    {
       this.sign_in_effect();
@@ -34,9 +35,10 @@ export class AuthEffects
             ofType(sign_in_action),
             tap((action)=>
             {
+
                // save user data
-               CookieService.set_cookie("user" , JSON.stringify(action.user));
-            
+               this.cookie_s.set('user' , JSON.stringify(action.user));
+
                // redirect to home page
                this.router.navigateByUrl("/orders/hall");
             
@@ -59,7 +61,7 @@ export class AuthEffects
                {
                
                   // delete user data
-                  CookieService.delete_cookie("user");
+                  this.cookie_s.delete("user");
                
                   // redirect to sign-in page
                   this.router.navigateByUrl("/");
