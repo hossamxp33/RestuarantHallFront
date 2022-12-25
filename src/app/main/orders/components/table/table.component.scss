@@ -8,6 +8,18 @@
 }
 
 
+.table-seats-2
+{
+   max-height: 170px;
+}
+
+.table-box
+{
+
+   min-width: 140px;
+   min-height: 140px;
+}
+
 .table-box:hover
 {
    animation-name: table_display;
@@ -24,4 +36,28 @@
 {
    from {transform: scale(1) rotateX(0deg); filter: brightness(1);}
    to {transform: scale(1.5) rotateX(45deg); filter: brightness(1.1) drop-shadow(1px 11px 0px black);}
+}
+
+
+
+
+@media screen and (max-width: 1200px)
+{
+
+   .table-seats-2
+   {
+      max-height: 150px;
+   }
+
+}
+
+
+@media screen and (max-width: 992px)
+{
+
+   .table-seats-2
+   {
+      max-height: 115px;
+   }
+
 }

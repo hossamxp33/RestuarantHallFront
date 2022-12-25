@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { HallResolver } from "src/app/core/resolvers/hall.resolver";
 import { OrdersComponent } from "./orders.component";
 import { HallComponent } from "./pages/hall/hall.component";
 import { MenuComponent } from "./pages/menu/menu.component";
@@ -22,7 +23,8 @@ export const ORDERS_ROUTES : Routes = [
          },
          {
             path: 'hall',
-            component: HallComponent
+            component: HallComponent,
+            resolve: { hall: HallResolver }
          },
          {
             path: 'menu',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphQLService } from 'src/app/core/services/graphql.service';
-import { GET_HALL_TABLE_QUERY } from '../../query/orders.query';
+import { select, Store } from '@ngrx/store';
+import { TABLES_SELECTOR } from '../../store/orders.selectors';
 
 
 
@@ -18,33 +18,34 @@ export class HallComponent implements OnInit {
   temp : any[] = [];
 
   constructor(
-    private query_s: GraphQLService
+    private store: Store<any>
   ) { }
 
   ngOnInit(): void 
   {
 
-    this.get_hall_tables_from_apollo();
+    this.get_tables();
 
   }
 
 
 
-  get_hall_tables_from_apollo()
+  get_tables()
   {
-    
-    this.query_s.query(GET_HALL_TABLE_QUERY).subscribe(
+
+    this.store.pipe(select(TABLES_SELECTOR)).subscribe(
       (response : any)=>{
-
-        this.tables = response.data.restables;
-
+        this.tables = response;
       },
       (err)=>{
         console.error(err);
       }
     );
-  
+
   }
+
+
+
 
 
 
