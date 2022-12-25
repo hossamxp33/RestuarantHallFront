@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { TableInterface } from 'src/app/core/interfaces/orders.interface';
+import { ADD_ORDER_BY_TABLE_ACTION } from '../../store/orders.actions';
 
 @Component({
   selector: 'app-table',
@@ -8,14 +11,28 @@ import { Router } from '@angular/router';
 })
 export class TableComponent implements OnInit {
 
-  @Input('table_seats') table_seats : number = 1;
-  @Input('table_number') table_number : number = 1;
+  @Input('table') table : TableInterface = this.init_table();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+
+    this.init_table();
+
+  }
+
+
+  init_table()
+  {
+    return {
+      number: 0,
+      seats: 0,
+      id: 0
+    };
   }
 
 
@@ -23,13 +40,8 @@ export class TableComponent implements OnInit {
   table_clicked()
   {
 
-
     // add order
-        
-
-
-    // redirect to menu view
-    this.router.navigateByUrl('/orders/menu');
+    this.store.dispatch(ADD_ORDER_BY_TABLE_ACTION( { table : this.table } ));
   
   }
 

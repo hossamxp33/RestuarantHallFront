@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { TABLES_LOADED_ACTION } from "./orders.actions";
+import { ADD_ORDER_BY_TABLE_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 import { ORDERS_STATES } from "./orders.init";
 
 
@@ -19,5 +19,17 @@ export const ORDERS_REDUCERS = createReducer(
          
          return new_state;
       }  
+   ),
+   on(
+      ADD_ORDER_BY_TABLE_ACTION,
+      (state , action)=>{
+
+         let new_state = {
+            ...state,
+            active_order_table: action.table
+         };
+
+         return new_state;
+      }
    )
 );

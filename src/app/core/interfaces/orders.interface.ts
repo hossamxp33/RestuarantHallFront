@@ -4,7 +4,8 @@
 
 export interface OrdersState
 {
-   tables: TableInterface[]
+   tables: TableInterface[],
+   active_order_table: TableInterface
 }
 
 
@@ -14,3 +15,5 @@ export interface TableInterface
    number: number,
    seats: number
 }
+
+

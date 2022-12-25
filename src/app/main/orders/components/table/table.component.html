@@ -2,6 +2,6 @@
 
 
 <div class="align-items-center col d-flex justify-content-center h-100 p-3 position-relative table-box" (click)="table_clicked();">
-   <span class="fs-4 fw-bold position-absolute start-50 top-50 translate-middle table-number">{{ table_number }}</span>
-   <img src="{{ table_seats | table_kind }}" alt="table" class="img-fluid table-img" [ngClass]="{ 'table-seats-2' : table_seats == 2 }">
+   <span class="fs-4 fw-bold position-absolute start-50 top-50 translate-middle table-number">{{ table.number }}</span>
+   <img src="{{ table.seats | table_kind }}" alt="table" class="img-fluid table-img" [ngClass]="{ 'table-seats-2' : table.seats == 2 }">
 </div>
