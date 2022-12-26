@@ -2,6 +2,16 @@
 
 
 
+export interface AuthState
+{
+   user : UserInterface,
+   restautant_data: RestaurantDataInterface
+}
+
+
+
+
+
 
 export interface UserInterface
 {
@@ -11,14 +21,10 @@ export interface UserInterface
 }
 
 
-export interface SignInBtnClickStatus
+export interface RestaurantDataInterface
 {
-   status: boolean
+   cover: string,
+   id: number,
+   logo: string,
+   name: string
 }
-
-
-export interface AuthState
-{
-   user : UserInterface
-}
-

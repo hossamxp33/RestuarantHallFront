@@ -1,6 +1,6 @@
 
 import { createReducer, on } from "@ngrx/store";
-import { sign_in_action, sign_out_action } from "./auth.actions";
+import { RESTAURANT_DATA_LOADED_ACTION, sign_in_action, sign_out_action } from "./auth.actions";
 import { Auth_STATES } from "./auth.init";
 
 
@@ -37,6 +37,18 @@ export const Auth_REDUCER = createReducer(
             }
          };
 
+      }
+   ),
+   on(
+      RESTAURANT_DATA_LOADED_ACTION,
+      (state , action)=>{
+         
+         let new_state = { 
+            ...state,
+            restautant_data: action.restaurant_data
+         };
+
+         return new_state;
       }
    )
    

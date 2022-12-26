@@ -8,5 +8,11 @@ export const Auth_STATES : AuthState  = {
       token : '',
       vendorId : ''
    },
+   restautant_data: {
+      cover: '',
+      id: 0,
+      logo: '',
+      name: ''
+   }
 };  
 

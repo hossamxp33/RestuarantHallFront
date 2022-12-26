@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { AppStates } from 'src/app/core/interfaces/app.interface';
+import { RestaurantDataInterface } from 'src/app/core/interfaces/auth.interface';
+import { environment } from 'src/environments/environment';
 import { sign_out_action } from '../auth/store/auth.actions';
+import { RESTAURANT_DATA_SELECTOR } from '../auth/store/auth.selectors';
 
 @Component({
   selector: 'app-orders',
@@ -9,11 +13,24 @@ import { sign_out_action } from '../auth/store/auth.actions';
 })
 export class OrdersComponent implements OnInit {
 
+  restaurant_data: RestaurantDataInterface = {
+    id: 0,
+    name: '',
+    logo: '',
+    cover: ''
+  };
+
+  img_url = environment.img_url + '/';
+
   constructor(
-    private store: Store
+    private store: Store<AppStates>
   ) { } 
 
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
+
+    this.get_restaurant_data();
+
   }
 
 
@@ -21,6 +38,15 @@ export class OrdersComponent implements OnInit {
   signing_out()
   {
     this.store.dispatch(sign_out_action());
+  }
+
+  get_restaurant_data()
+  {
+    this.store.pipe(select(RESTAURANT_DATA_SELECTOR)).subscribe(
+      (data : RestaurantDataInterface)=>{
+        this.restaurant_data = data;
+      }
+    );
   }
 
 }

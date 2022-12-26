@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthState } from './core/interfaces/auth.interface';
-import { sign_in_action } from './main/auth/store/auth.actions';
+import { GET_RESTAURANT_DATA_ACTION, sign_in_action } from './main/auth/store/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +37,9 @@ export class AppComponent implements OnInit
 
     if ( temp )
     {
+      // get restautant data
+      this.store.dispatch(GET_RESTAURANT_DATA_ACTION());
+      // auto sign-in
       this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }));
     }
 

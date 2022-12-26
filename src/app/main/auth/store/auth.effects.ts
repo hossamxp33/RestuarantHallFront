@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Store } from "@ngrx/store";
 import { CookieService } from "ngx-cookie-service";
 import { tap } from "rxjs";
-import { sign_in_action, sign_out_action } from "./auth.actions";
+import { AppStates } from "src/app/core/interfaces/app.interface";
+import { GraphQLService } from "src/app/core/services/graphql.service";
+import { GET_RESTAURANT_DATA } from "../graph/auth.query";
+import { GET_RESTAURANT_DATA_ACTION, RESTAURANT_DATA_LOADED_ACTION, sign_in_action, sign_out_action } from "./auth.actions";
 
 
 
@@ -50,10 +54,37 @@ export class AuthEffects
    );
 
 
+   loading_restaurant_data$ = createEffect(
+      ()=>{
+         return this.actions$.pipe(
+            ofType(GET_RESTAURANT_DATA_ACTION),
+            tap(()=>{
+   
+               this.graph_s.query(GET_RESTAURANT_DATA).subscribe(
+                  (response: any)=>{
+                     console.log("🎄 : ", response);
+
+                     this.store.dispatch(RESTAURANT_DATA_LOADED_ACTION( { restaurant_data: response.data.restaurants[0]} ));
+
+                  },
+                  (err)=>{
+                     console.error(err);
+                  }
+               );
+               
+            })
+         )
+      },
+      { dispatch: false }
+   );
+
+
    constructor(
       private actions$: Actions,
       private router: Router,
-      private cookie_s: CookieService
+      private cookie_s: CookieService,
+      private graph_s: GraphQLService,
+      private store: Store<AppStates>
    )
    {}
 
