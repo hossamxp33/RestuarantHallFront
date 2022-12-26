@@ -19,9 +19,13 @@ export class AppComponent implements OnInit
   ){}
 
   ngOnInit(): void 
-  {
+  { 
 
+    // auto-login if user signed-in (token exists!)
     this.check_user_status();
+
+    // get restaurants details
+    this.get_restaurant_details();
       
   }
 
@@ -31,13 +35,19 @@ export class AppComponent implements OnInit
 
     let temp = this.cookie_s.get('user');
 
-    console.log("🍪 cookie exist ? " , temp);
-
     if ( temp )
     {
       this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }));
     }
 
+
+  }
+
+
+  get_restaurant_details()
+  {
+
+    
 
   }
 

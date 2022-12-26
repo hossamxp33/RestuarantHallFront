@@ -6,8 +6,8 @@ import { tap } from "rxjs";
 import { TableInterface } from "src/app/core/interfaces/orders.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
 import { OrdersService } from "src/app/core/services/orders.service";
-import { GET_HALL_TABLE_QUERY, GET_MENU_QUERY } from "../graph/orders.query";
-import { ADD_ORDER_BY_TABLE_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { GET_ALL_ORDERS_QUERY, GET_HALL_TABLE_QUERY, GET_MENU_QUERY } from "../graph/orders.query";
+import { ADD_ORDER_BY_TABLE_ACTION, LOAD_ALL_ORDERS_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 
 
 
@@ -82,7 +82,19 @@ export class HallEffects
 
 
 
+   load_orders_history = createEffect(
+      ()=>{
+         return this.actions$.pipe(
+            ofType(LOAD_ALL_ORDERS_ACTION),
+            tap((action)=>{
+   
+               this.load_all_orders(action.date);
 
+            })
+         )
+      },
+      { dispatch: false }
+   );
 
 
 
@@ -144,6 +156,27 @@ export class HallEffects
 
    }
 
+
+
+   load_all_orders(data : string)
+   {
+
+      console.log("🏎️ date: ", data);
+      // console.log("🏎️ query: ", GET_ALL_ORDERS_QUERY(data));
+
+      this.query_s.query(GET_ALL_ORDERS_QUERY(data)).subscribe(
+         (response : any)=>{
+
+            // call action
+            console.log("🤢 response: " , response);
+
+         },
+         (err)=>{
+            console.error(err);
+         }
+      );
+
+   }
 
 
 }

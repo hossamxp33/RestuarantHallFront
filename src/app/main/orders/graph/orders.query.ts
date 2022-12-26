@@ -32,3 +32,32 @@ export const GET_MENU_QUERY = gql`
       }
     }
   }`;
+
+
+export const GET_ALL_ORDERS_QUERY = (filter_date : string)=>{
+
+  return gql`
+  {
+    orders( branch_id: ${environment.branch_id} , DateFilter: "${filter_date}" ) 
+    {
+      id 
+      total 
+      paymenttype {
+        name
+      }
+      order_details {
+        total
+        menu_categories_items {
+          name
+          photo
+          price
+        }
+      }
+      table {
+        number
+        seats
+      } 
+    } 
+  }`;
+
+};

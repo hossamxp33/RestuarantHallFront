@@ -38,3 +38,9 @@ export const SET_ACTIVE_CATEGORY_ACTION = createAction(
    "[menu controller] setting active category",
    props<{ active_category: MenuInterface }>()
 );
+
+
+export const LOAD_ALL_ORDERS_ACTION = createAction(
+   "[orders all page resolver] load orders history",
+   props<{ date: string }>()
+);
