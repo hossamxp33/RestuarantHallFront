@@ -26,6 +26,9 @@ export class AuthEffects
             // save user data
             this.cookie_s.set('user' , JSON.stringify(action.user));
 
+            // get restautant data
+            this.store.dispatch(GET_RESTAURANT_DATA_ACTION());
+
             // redirect to home page
             this.router.navigateByUrl("/orders/hall");
          

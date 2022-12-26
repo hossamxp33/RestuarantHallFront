@@ -37,8 +37,6 @@ export class AppComponent implements OnInit
 
     if ( temp )
     {
-      // get restautant data
-      this.store.dispatch(GET_RESTAURANT_DATA_ACTION());
       // auto sign-in
       this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }));
     }
