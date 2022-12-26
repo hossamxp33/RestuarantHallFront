@@ -12,7 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { META_REDUCERS, STORE_STATES } from './store/app.states';
+import { STORE_STATES } from './store/app.states';
 import { APP_EFFECTS } from './store/app.effects';
 import { APP_PROVIDERS } from './app.providers';
 @NgModule({
