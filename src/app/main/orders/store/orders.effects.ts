@@ -7,7 +7,7 @@ import { TableInterface } from "src/app/core/interfaces/orders.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
 import { OrdersService } from "src/app/core/services/orders.service";
 import { GET_HALL_TABLE_QUERY, GET_MENU_QUERY } from "../graph/orders.query";
-import { ADD_ORDER_BY_TABLE_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { ADD_ORDER_BY_TABLE_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 
 
 
@@ -132,6 +132,9 @@ export class HallEffects
       this.query_s.query(GET_MENU_QUERY).subscribe(
          (response : any)=>{
             console.log("💖 : " , response);
+
+            this.store.dispatch(MENU_LOADED_ACTION({ menu: response.data.menuCategories }))
+
          },
          (err)=>{
             console.error(err);

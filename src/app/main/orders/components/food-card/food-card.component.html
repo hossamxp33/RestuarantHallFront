@@ -4,13 +4,13 @@
 
 <div class="d-flex flex-column card" (click)="trigger_modal();">
    
-   <div class="card-img">
-      <img src="{{ card_img }}" alt="food" class="img-fluid">
+   <div class="card-img img-box">
+      <img src="{{ img_url + category.photo }}" alt="food" class="img-fluid h-100 w-100">
    </div>
 
    <div class="card-text d-flex flex-column align-items-center py-3 gap-2">
-      <h1 class="text-1 m-0 fw-bold">بيف برجر</h1>
-      <h2 class="text-2 m-0 fw-bold"> 14 ر.س</h2>
+      <h1 class="text-1 m-0 fw-bold text-center">{{ category.name }}</h1>
+      <h2 class="text-2 m-0 fw-bold text-center"> {{ category.price }} ر.س</h2>
    </div>
 
 </div>

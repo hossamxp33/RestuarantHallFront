@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { TableInterface } from "src/app/core/interfaces/orders.interface";
+import { MenuInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -28,7 +28,13 @@ export const LOAD_MENU_ACTION = createAction(
 );
 
 
-// export const MENU_LOADED_ACTION = createAction(
-//    "[load menu effects] menu loaded",
-//    props<>()
-// );
+export const MENU_LOADED_ACTION = createAction(
+   "[orders effects] loading menu",
+   props<{ menu : MenuInterface[] }>()
+);
+
+
+export const SET_ACTIVE_CATEGORY_ACTION = createAction(
+   "[menu controller] setting active category",
+   props<{ active_category: MenuInterface }>()
+);

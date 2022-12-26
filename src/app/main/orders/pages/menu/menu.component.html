@@ -17,11 +17,11 @@
             <h1 class="m-0 header-title fw-bold">القائمة</h1>
          </div>
 
-         <div class="d-flex gap-2 my-3 categories-box justify-content-start flex-row-reverse">
-            <h2 class="active px-2">برجر</h2>
-            <h2 class="px-2">أطباق جانبية</h2>
-            <h2 class="px-2">مشروبات</h2>
-            <h2 class="px-2">الحلو</h2>
+         <div class="d-flex gap-2 my-3 categories-box justify-content-start flex-row-reverse flex-wrap">
+            <h2 #menu_cat_item (click)="menu_category_clicked(menu_cat_item , menu);" class="px-2 menu-cat cursor-pointer" 
+            [ngClass]="{ 'active' : active_category_index == i }" *ngFor="let menu of menus; let i = index;">
+               {{ menu?.name }}
+            </h2>
          </div>
       
       </div>
@@ -29,7 +29,7 @@
    
       <!-- body -->
       <div class="food-card-box h-100 pb-5 px-5 row row-cols-4">
-         <app-food-card *ngFor="let food of foods;" [card_img]="food"></app-food-card>
+         <app-food-card *ngFor="let category of active_category?.menu_categories_items;" [category]="category"></app-food-card>
       </div>
 
    </div>

@@ -11,3 +11,16 @@ export const TABLES_SELECTOR = createSelector(
    (app_state : AppStates )=> app_state.orders,
    (state : OrdersState)=> state.tables
 );
+
+
+
+export const MENU_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.menu
+);
+
+
+export const ACTIVE_CATEGORY_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_states: OrdersState)=> orders_states.active_menu_category
+);

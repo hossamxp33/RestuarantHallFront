@@ -27,6 +27,8 @@ export const GET_MENU_QUERY = gql`
       {
         id 
         name
+        photo
+        price
       }
     }
   }`;
