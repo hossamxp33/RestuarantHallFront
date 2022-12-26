@@ -1,12 +1,9 @@
-import { AuthState } from "./auth.interface";
-import { OrdersState } from "./orders.interface";
-
-
+import { AuthState } from "./auth.interface"
+import { OrdersState } from "./orders.interface"
 
 
 export interface AppStates
 {
-   router: any
-   auth: any
-   orders: any
+   auth: AuthState
+   orders: OrdersState
 }

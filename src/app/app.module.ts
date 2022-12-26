@@ -15,9 +15,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { META_REDUCERS, STORE_STATES } from './store/app.states';
 import { APP_EFFECTS } from './store/app.effects';
 import { APP_PROVIDERS } from './app.providers';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterState } from '@ngrx/router-store';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,15 +27,11 @@ import { RouterState } from '@ngrx/router-store';
     RouterModule.forRoot(APP_ROUTES),
     HttpClientModule,
     GraphQLModule,
-    StoreModule.forRoot(STORE_STATES , { metaReducers : META_REDUCERS , runtimeChecks: {
+    StoreModule.forRoot(STORE_STATES , { runtimeChecks: {
       strictStateImmutability: true
     } }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot(APP_EFFECTS),
-    StoreRouterConnectingModule.forRoot({
-      stateKey: 'router',
-      routerState: RouterState.Minimal
-    })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: APP_PROVIDERS,
   bootstrap: [AppComponent]
