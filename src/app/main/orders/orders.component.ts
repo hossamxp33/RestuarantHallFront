@@ -5,6 +5,7 @@ import { RestaurantDataInterface } from 'src/app/core/interfaces/auth.interface'
 import { environment } from 'src/environments/environment';
 import { sign_out_action } from '../auth/store/auth.actions';
 import { RESTAURANT_DATA_SELECTOR } from '../auth/store/auth.selectors';
+import { SEARCH_ITEM_BY_NAME_ACTION } from './store/orders.actions';
 
 @Component({
   selector: 'app-orders',
@@ -40,6 +41,8 @@ export class OrdersComponent implements OnInit {
     this.store.dispatch(sign_out_action());
   }
 
+
+
   get_restaurant_data()
   {
     this.store.pipe(select(RESTAURANT_DATA_SELECTOR)).subscribe(
@@ -48,5 +51,24 @@ export class OrdersComponent implements OnInit {
       }
     );
   }
+
+
+  searching_by_name(search_string : any)
+  {
+
+    let search_name = search_string.target.value;
+    
+    
+    // START SEARCHING STARTING FROM 3 LETTERS
+    if ( search_name.length >= 3 )
+    {
+      console.log("🎄🎄🎄 : ", search_name);
+      this.store.dispatch(SEARCH_ITEM_BY_NAME_ACTION({ search_string: search_name }));
+    }
+
+  }
+
+
+
 
 }

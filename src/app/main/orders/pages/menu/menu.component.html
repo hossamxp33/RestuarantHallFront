@@ -29,7 +29,7 @@
    
       <!-- body -->
       <div class="food-card-box h-100 pb-5 px-2 row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
-         <app-food-card *ngFor="let category of active_category?.menu_categories_items;" [category]="category"></app-food-card>
+         <app-food-card *ngFor="let category of ( results_type == 1 ? active_category?.menu_categories_items : search_results_for_items);" [category]="category"></app-food-card>
       </div>
 
    </div>

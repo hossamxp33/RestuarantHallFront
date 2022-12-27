@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { MenuInterface, OrderInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
+import { MenuInterface, MenuItemInterface, OrderInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -50,4 +50,22 @@ export const LOAD_ALL_ORDERS_ACTION = createAction(
 export const ALL_ORDERS_LOADED_ACTION = createAction(
    "[orders effects] save all orders",
    props<{ orders: OrderInterface[] }>()
+);
+
+
+export const SEARCH_ITEM_BY_NAME_ACTION = createAction(
+   "[orders controller] searchig items",
+   props<{ search_string: string }>()
+);
+
+
+export const SEARCHED_ITEM_COMPLETE_ACTION = createAction(
+   "[orders effects] save searched items",
+   props<{ searched_items: MenuItemInterface[] }>()
+);
+
+
+export const SET_SEARCH_RESULTS_TYPE_ACTION = createAction(
+   "[orders controller] set search results type",
+   props<{ search_results_type: number }>()
 );

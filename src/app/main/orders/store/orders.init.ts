@@ -1,3 +1,4 @@
+import { ITEMS_RESULTS_TYPE } from "src/app/core/enums/items_result_type.enum";
 import { OrdersState } from "src/app/core/interfaces/orders.interface";
 
 
@@ -17,6 +18,8 @@ export const ORDERS_STATES : OrdersState = {
       name: '',
       menu_categories_items: []
    },
-   orders: []
+   orders: [],
+   search_results_type: ITEMS_RESULTS_TYPE.menu,
+   searched_items: []
    
 };

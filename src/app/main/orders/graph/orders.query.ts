@@ -52,3 +52,19 @@ export const GET_ALL_ORDERS_QUERY = (filter_date : string)=>{
 
 };
 
+
+
+export const SEARCH_ITEMS_BY_NAME_QUERY = (search_string : string)=>{
+
+
+  return gql`{
+    menuCategoriesItems(nameLike: "%${search_string}%" vendor_id: ${environment.vendor_id})     
+    {
+      id 
+      name 
+      photo
+      price
+    }
+  }`
+
+}

@@ -1,5 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
-import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, MENU_LOADED_ACTION, SET_ACTIVE_CATEGORY_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { OrdersState } from "src/app/core/interfaces/orders.interface";
+import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, MENU_LOADED_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SET_ACTIVE_CATEGORY_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 import { ORDERS_STATES } from "./orders.init";
 
 
@@ -12,7 +13,7 @@ export const ORDERS_REDUCERS = createReducer(
       TABLES_LOADED_ACTION,
       (state , action)=>{
          
-         let new_state: any = {
+         let new_state: OrdersState = {
             ...state,
             tables: action.tables
          };
@@ -24,7 +25,7 @@ export const ORDERS_REDUCERS = createReducer(
       ADD_ORDER_BY_TABLE_ACTION,
       (state , action)=>{
 
-         let new_state = {
+         let new_state: OrdersState = {
             ...state,
             active_order_table: action.table
          };
@@ -36,7 +37,7 @@ export const ORDERS_REDUCERS = createReducer(
       MENU_LOADED_ACTION,
       (state , action)=>{
 
-         let new_state = {
+         let new_state: OrdersState = {
             ...state,
             menu: action.menu
          };
@@ -49,7 +50,7 @@ export const ORDERS_REDUCERS = createReducer(
       SET_ACTIVE_CATEGORY_ACTION,
       (state , action)=>{
 
-         let new_state = {
+         let new_state: OrdersState = {
             ...state,
             active_menu_category: action.active_category
          };
@@ -62,9 +63,35 @@ export const ORDERS_REDUCERS = createReducer(
       ALL_ORDERS_LOADED_ACTION,
       (state, action)=>{
 
-         let new_state ={
+         let new_state: OrdersState ={
             ...state,
             orders: action.orders
+         };
+
+
+         return new_state;
+      }
+   ),
+   on(
+      SEARCHED_ITEM_COMPLETE_ACTION,
+      (state, action)=>{
+
+         let new_state: OrdersState = {
+            ...state,
+            searched_items: action.searched_items
+         };
+
+
+         return new_state;
+      }
+   ),
+   on(
+      SET_SEARCH_RESULTS_TYPE_ACTION,
+      (state, action)=>{
+
+         let new_state: OrdersState = {
+            ...state,
+            search_results_type: action.search_results_type
          };
 
 

@@ -8,7 +8,9 @@ export interface OrdersState
    active_order_table: TableInterface,
    menu: MenuInterface[],
    active_menu_category: MenuInterface,
-   orders: OrderInterface[]
+   orders: OrderInterface[],
+   search_results_type: number,
+   searched_items: MenuItemInterface[]
 }
 
 

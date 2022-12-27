@@ -30,3 +30,15 @@ export const ALL_ORDERS_STATE = createSelector(
    (app_state: AppStates)=> app_state.orders,
    (orders_state: OrdersState)=> orders_state.orders
 );
+
+
+export const SEARCHED_ITEMS_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (order_state: OrdersState)=> order_state.searched_items
+);
+
+
+export const ITEMS_RESULTS_TYPE_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.search_results_type
+);
