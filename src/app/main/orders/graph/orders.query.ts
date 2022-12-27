@@ -38,26 +38,17 @@ export const GET_ALL_ORDERS_QUERY = (filter_date : string)=>{
 
   return gql`
   {
-    orders( branch_id: ${environment.branch_id} , DateFilter: "${filter_date}" ) 
+    orders( DateFilter: ["${filter_date}","2022-12-31"] ) 
     {
-      id 
-      total 
-      paymenttype {
-        name
-      }
-      order_details {
-        total
-        menu_categories_items {
-          name
-          photo
-          price
-        }
-      }
+      id
       table {
-        number
+        id
         seats
-      } 
+        number
+      }
+      total
     } 
   }`;
 
 };
+

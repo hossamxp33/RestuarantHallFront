@@ -7,7 +7,8 @@ export interface OrdersState
    tables: TableInterface[],
    active_order_table: TableInterface,
    menu: MenuInterface[],
-   active_menu_category: MenuInterface
+   active_menu_category: MenuInterface,
+   orders: OrderInterface[]
 }
 
 
@@ -34,3 +35,9 @@ export interface MenuItemInterface
    price: number
 }
 
+export interface OrderInterface
+{
+   id: number,
+   table: TableInterface,
+   total: number
+}

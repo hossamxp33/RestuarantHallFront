@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthState } from './core/interfaces/auth.interface';
-import { GET_RESTAURANT_DATA_ACTION, sign_in_action } from './main/auth/store/auth.actions';
+import { sign_in_action } from './main/auth/store/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -24,9 +24,6 @@ export class AppComponent implements OnInit
     // auto-login if user signed-in (token exists!)
     this.check_user_status();
 
-    // get restaurants details
-    this.get_restaurant_details();
-      
   }
 
 
@@ -41,14 +38,6 @@ export class AppComponent implements OnInit
       this.store.dispatch(sign_in_action({ user: JSON.parse(temp) }));
     }
 
-
-  }
-
-
-  get_restaurant_details()
-  {
-
-    
 
   }
 

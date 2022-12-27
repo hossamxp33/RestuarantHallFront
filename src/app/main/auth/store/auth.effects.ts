@@ -82,6 +82,22 @@ export class AuthEffects
    );
 
 
+   // loaded_restaurant_details$ = createEffect(
+   //    ()=>{
+
+   //       return this.actions$.pipe(
+   //          ofType(RESTAURANT_DATA_LOADED_ACTION),
+   //          tap((action)=>{
+
+
+   //          })
+   //       )
+
+   //    },
+   //    { dispatch: false }
+   // );
+
+
    constructor(
       private actions$: Actions,
       private router: Router,

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { AppStates } from 'src/app/core/interfaces/app.interface';
+import { OrderInterface } from 'src/app/core/interfaces/orders.interface';
+import { ALL_ORDERS_STATE } from '../../store/orders.selectors';
 
 @Component({
   selector: 'app-orders-all',
@@ -14,43 +18,16 @@ export class OrdersAllComponent implements OnInit {
   
 
 
-  constructor() { }
+  constructor(
+    private store: Store<AppStates>
+  ) { }
 
   ngOnInit(): void 
   {
 
-    this.orders = [
-      {
-        order_number: 10,
-        table_number: 12,
-        guests_number: 2,
-        total: 110
-      },
-      {
-        order_number: 10,
-        table_number: 12,
-        guests_number: 2,
-        total: 110
-      },
-      {
-        order_number: 10,
-        table_number: 12,
-        guests_number: 2,
-        total: 110
-      },
-      {
-        order_number: 10,
-        table_number: 12,
-        guests_number: 2,
-        total: 110
-      },
-      {
-        order_number: 10,
-        table_number: 12,
-        guests_number: 2,
-        total: 110
-      }
-    ];
+
+    this.get_all_orders();
+
 
 
     this.order_details = [
@@ -88,6 +65,25 @@ export class OrdersAllComponent implements OnInit {
 
 
   
+
+  get_all_orders()
+  {
+
+    this.store.pipe( select(ALL_ORDERS_STATE) ).subscribe(
+      (orders : OrderInterface[])=>{
+
+        this.orders = orders;
+
+        console.log("🎄: " , this.orders);
+
+      }
+    );
+
+
+  }
+
+
+
 
 }
 

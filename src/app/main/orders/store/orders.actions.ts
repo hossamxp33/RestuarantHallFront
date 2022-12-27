@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { MenuInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
+import { MenuInterface, OrderInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -43,4 +43,11 @@ export const SET_ACTIVE_CATEGORY_ACTION = createAction(
 export const LOAD_ALL_ORDERS_ACTION = createAction(
    "[orders all page resolver] load orders history",
    props<{ date: string }>()
+);
+
+
+
+export const ALL_ORDERS_LOADED_ACTION = createAction(
+   "[orders effects] save all orders",
+   props<{ orders: OrderInterface[] }>()
 );

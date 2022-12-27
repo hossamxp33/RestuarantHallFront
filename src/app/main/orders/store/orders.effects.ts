@@ -7,7 +7,7 @@ import { TableInterface } from "src/app/core/interfaces/orders.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
 import { OrdersService } from "src/app/core/services/orders.service";
 import { GET_ALL_ORDERS_QUERY, GET_HALL_TABLE_QUERY, GET_MENU_QUERY } from "../graph/orders.query";
-import { ADD_ORDER_BY_TABLE_ACTION, LOAD_ALL_ORDERS_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, LOAD_ALL_ORDERS_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 
 
 
@@ -162,13 +162,14 @@ export class HallEffects
    {
 
       console.log("🏎️ date: ", data);
-      // console.log("🏎️ query: ", GET_ALL_ORDERS_QUERY(data));
+      console.log("🏎️ query: ", GET_ALL_ORDERS_QUERY(data));
 
       this.query_s.query(GET_ALL_ORDERS_QUERY(data)).subscribe(
          (response : any)=>{
 
             // call action
             console.log("🤢 response: " , response);
+            this.store.dispatch( ALL_ORDERS_LOADED_ACTION( { orders: response.data.orders } ) );
 
          },
          (err)=>{

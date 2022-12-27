@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { ADD_ORDER_BY_TABLE_ACTION, MENU_LOADED_ACTION, SET_ACTIVE_CATEGORY_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, MENU_LOADED_ACTION, SET_ACTIVE_CATEGORY_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 import { ORDERS_STATES } from "./orders.init";
 
 
@@ -12,7 +12,7 @@ export const ORDERS_REDUCERS = createReducer(
       TABLES_LOADED_ACTION,
       (state , action)=>{
          
-         let new_state = {
+         let new_state: any = {
             ...state,
             tables: action.tables
          };
@@ -52,6 +52,19 @@ export const ORDERS_REDUCERS = createReducer(
          let new_state = {
             ...state,
             active_menu_category: action.active_category
+         };
+
+
+         return new_state;
+      }
+   ),
+   on(
+      ALL_ORDERS_LOADED_ACTION,
+      (state, action)=>{
+
+         let new_state ={
+            ...state,
+            orders: action.orders
          };
 
 

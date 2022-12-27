@@ -24,3 +24,9 @@ export const ACTIVE_CATEGORY_SELECTOR = createSelector(
    (app_state: AppStates)=> app_state.orders,
    (orders_states: OrdersState)=> orders_states.active_menu_category
 );
+
+
+export const ALL_ORDERS_STATE = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.orders
+);

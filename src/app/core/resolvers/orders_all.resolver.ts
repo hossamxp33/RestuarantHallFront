@@ -15,7 +15,8 @@ export class OrdersAllResolver implements Resolve<any>
 {
 
    flag: boolean = false;
-   today_date: string = new Date().toISOString().split('T')[0];
+   today_date: string = "2022-12-1";   // NOTE: DELETE THIS LATER, TESTING ONLY
+   // today_date: string = new Date().toISOString().split('T')[0];
 
    constructor(
       private store: Store<AppStates>

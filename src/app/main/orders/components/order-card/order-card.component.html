@@ -5,20 +5,20 @@
 <div class="card d-flex flex-column gap-2 p-4">
 
    <div class="d-flex justify-content-between align-items-center flex-row-reverse">
-      <h1 class="order-title fw-bold">طلب #{{ order_number }}</h1>
-      <h2 class="price-total dir-rtl">{{ total }} ر.س</h2>
+      <h1 class="order-title fw-bold">طلب #{{ order.id || 0 }}</h1>
+      <h2 class="price-total dir-rtl">{{ order.total || 0 }} ر.س</h2>
    </div>
 
    <div class="d-flex gap-4 dir-rtl align-items-center">
 
       <div class="d-flex gap-1 dir-rtl align-items-center">
          <img src="../../../../../assets/icons/table_icon.svg" alt="table" width="24" height="24">
-         <p class="m-0 meta-title">طاولة: <i class="fw-bold font-style-normal fs-4">{{ table_number }}</i></p>
+         <p class="m-0 meta-title">طاولة: <i class="fw-bold font-style-normal fs-4">{{ order.table ? order.table.number :  0 }}</i></p>
       </div>
 
       <div class="d-flex gap-1 dir-rtl align-items-center">
          <img src="../../../../../assets/icons/people.svg" alt="people" width="24" height="24">
-         <p class="m-0 meta-title">الضيوف: <i class="fw-bold font-style-normal fs-4">{{ guests_number }}</i></p>
+         <p class="m-0 meta-title">الضيوف: <i class="fw-bold font-style-normal fs-4">{{ order.table ? order.table.seats : 0 }}</i></p>
       </div>
 
    </div>

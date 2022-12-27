@@ -16,6 +16,7 @@ export const ORDERS_STATES : OrdersState = {
       id: 0,
       name: '',
       menu_categories_items: []
-   }
+   },
+   orders: []
    
 };

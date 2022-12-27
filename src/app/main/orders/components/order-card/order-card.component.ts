@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { OrderInterface } from 'src/app/core/interfaces/orders.interface';
 
 @Component({
   selector: 'app-order-card',
@@ -8,10 +9,15 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OrderCardComponent implements OnInit {
 
 
-  @Input('order_number') order_number : number = 0;
-  @Input('table_number') table_number : number = 0;
-  @Input('guests_number') guests_number : number = 0;
-  @Input('total') total : number = 0;
+  @Input('order') order : OrderInterface = {
+    id: 0,
+    table: {
+      id: 0,
+      seats: 0,
+      number: 0    
+    },
+    total: 0
+  };
 
   constructor() { }
 

@@ -32,10 +32,7 @@
          <div class="food-card-box p-4 table-box row row-cols-1 gap-4">
             <app-order-card 
             *ngFor="let order of orders;" 
-            [order_number]="order.order_number"
-            [table_number]="order.table_number"
-            [guests_number]="order.guests_number"
-            [total]="order.total"
+            [order]="order"
             >
             </app-order-card>
          </div>
