@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { FoodModalService } from 'src/app/core/services/food-modal.service';
 
 @Component({
   selector: 'app-food-modal',
@@ -38,16 +37,15 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
   
   constructor(
-    private f_m_s : FoodModalService
   ) { }
 
   ngOnInit(): void 
   {
     // set food modal state
-    this.recycables.push( this.sub_to_modal_status() ); 
+    this.sub_to_modal_status(); 
 
     // listen to food modal
-    this.recycables.push( this.sub_to_food_modal() );
+    this.sub_to_food_modal();
     
 
   }
@@ -55,13 +53,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   
   ngOnDestroy(): void 
   {
-    this.recycables.forEach((el : Subscription)=>{
-      el.unsubscribe();
-    });
-
-    // reset modal
-    this.f_m_s.set_active_status(false);
-    
+      
   }
 
 
@@ -70,11 +62,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   sub_to_modal_status()
   {
 
-    return this.f_m_s.get_active_state().subscribe(
-      (value : boolean)=>{
-        this.is_modal_active = value;
-      }
-    );
+
 
   }
 
@@ -82,43 +70,40 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   sub_to_food_modal()
   {
 
-    return this.f_m_s.get_modal_data().subscribe(
-      (data : any)=>{
+    // return this.f_m_s.get_modal_data().subscribe(
+    //   (data : any)=>{
 
 
-        // check for initial subscription
-        if (  Object.keys(data).length != 0 )
-        {
+    //     // check for initial subscription
+    //     if (  Object.keys(data).length != 0 )
+    //     {
 
-          // set modal data
-          this.modalContent = data;
+    //       // set modal data
+    //       this.modalContent = data;
 
-          // set topics data
-          if ( this.modalContent.menu_options_topics && ( <Array<any>> this.modalContent.menu_options_topics).length != 0 )
-          {
-            // meal topics exist
-            this.meal_topics = ( <Array<any>> this.modalContent.menu_options_topics).map((el : any)=>{
-              return { id : el.id , max_options_number : el.max_option_checks , name : el.name };
-            });
+    //       // set topics data
+    //       if ( this.modalContent.menu_options_topics && ( <Array<any>> this.modalContent.menu_options_topics).length != 0 )
+    //       {
+    //         // meal topics exist
+    //         this.meal_topics = ( <Array<any>> this.modalContent.menu_options_topics).map((el : any)=>{
+    //           return { id : el.id , max_options_number : el.max_option_checks , name : el.name };
+    //         });
 
-          }
+    //       }
 
-          // console.log("⚠️ modal data : " , this.modalContent);
-          // console.log("⚠️ modal topics : " , this.meal_topics);
+    //       // console.log("⚠️ modal data : " , this.modalContent);
+    //       // console.log("⚠️ modal topics : " , this.meal_topics);
 
 
-          // set seperate data varibles for calc
-          this.qty = 1;
-          this.base_price = this.modalContent.price;
-          this.total_price = this.base_price;
+    //       // set seperate data varibles for calc
+    //       this.qty = 1;
+    //       this.base_price = this.modalContent.price;
+    //       this.total_price = this.base_price;
 
-        }
+    //     }
 
-      },
-      (err)=>{
-        console.error("error happended : ", err);
-      }
-    );
+    //   }
+    // );
 
 
   }
@@ -292,7 +277,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
     // console.log("🍌  :  " , item);
 
     // get resturant id for selected meal
-    this.rest_id = this.f_m_s.get_resturant_id(item);
+    // this.rest_id = this.f_m_s.get_resturant_id(item);
 
 
     // put all options names in a string (meal options)
@@ -377,7 +362,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
   exit_food_modal()
   {
-    this.f_m_s.set_active_status(false);
+    // this.f_m_s.set_active_status(false);
 
     this.resetModal();
   }

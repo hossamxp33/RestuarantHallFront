@@ -1,0 +1,85 @@
+
+
+
+.outer-box
+{
+   max-width: 400px;
+}
+
+.title
+{
+   font-style: normal;
+   font-weight: 700;
+   font-size: 32px;
+   line-height: 38px;
+   text-align: right;
+   letter-spacing: 0.03em;
+   color: var(--color-1);
+}
+
+
+.client-results-outer-box
+{
+   border-color: var(--color-4) !important;
+}
+
+.client-results-box
+{
+   max-height: 200px;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}
+
+
+.client-results-box li
+{
+   cursor: pointer;
+   padding: 10px;
+}
+
+.client-results-box li:hover
+{
+   border-right: 7px solid var(--color-4) !important;
+   border-radius: 3px;
+   border: 1px solid var(--color-4);
+}
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.client-results-box::-webkit-scrollbar {
+   display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.client-results-box {
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+}
+
+
+.alert-text
+{
+   font-style: normal;
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 17px;
+   letter-spacing: 0.03em;
+}
+
+
+
+.add-btn-text
+{
+   color: var(--color-4);
+   font-style: normal;
+   font-weight: 500;
+   font-size: 16px;
+   line-height: 19px;
+   text-align: right;
+}
+
+.add-btn
+{
+   border-color: var(--color-4) !important;
+   border-style: solid;
+}

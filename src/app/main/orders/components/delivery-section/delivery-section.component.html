@@ -1,0 +1,41 @@
+
+
+
+
+
+<div class="d-flex h-100 justify-content-center align-items-center">
+
+   <div class="align-items-center d-flex flex-column outer-box p-5 rounded-5 shadow w-100">
+
+      <h1 class="title m-0">ابدأ الطلب</h1>
+
+      <div class="dir-rtl mt-5 w-100 mb-5 position-relative">
+         
+         <div>
+            <label for="phone_num_input" class="form-label mb-2">رقم الهاتف</label>
+            <input (input)="typing_phone_number($event);" class="border-dark form-control px-4 py-2 shadow-none" type="text" id="phone_num_input" placeholder="رقم الهاتف" #phone_input>
+         </div>
+      
+         <div *ngIf="(clients_results.length != 0) && (phone_input.value != '')" class="bg-white border border-1 position-absolute rounded-2 w-100 client-results-outer-box">
+            <ul class="client-results-box list-unstyled p-0">
+               <li *ngFor="let client of clients_results">{{ client.username || 'غير معرف' }}</li>
+            </ul>
+         </div>
+
+         <div *ngIf="(clients_results.length == 0) && (phone_input.value != '')">
+            <p class="text-muted alert-text m-0 mt-2">لم يتم العثور على عميل حالي</p>
+         </div>
+
+         <div class="mt-5">
+            <button  (click)="add_new_client();" type="button" class="align-items-center d-flex gap-3 justify-content-center px-4 py-3 rounded-3 w-100 add-btn">
+               <img src="../../../../../assets/icons/add.svg" width="14" height="14">
+               <span class="m-0 add-btn-text">أضف عميل جديد</span>
+            </button>
+         </div>
+      
+      </div>
+
+
+   </div>
+
+</div>

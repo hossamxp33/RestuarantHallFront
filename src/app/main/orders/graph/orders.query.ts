@@ -68,3 +68,52 @@ export const SEARCH_ITEMS_BY_NAME_QUERY = (search_string : string)=>{
   }`
 
 }
+
+export const GET_SINGLE_ORDER_DETAILS_QUERY = (order_id: number)=>{   // test with=> (order_id: 2405)
+
+  return gql`
+  {
+    orders(id: ${order_id}) 
+    {
+      id 
+      taxes
+      total
+      sub_total
+      table {
+        number
+        seats
+      }
+      paymenttype {
+        name
+      }
+      order_details {
+        amount
+        total
+        menu_categories_items {
+          photo
+          name
+        }
+      }
+  
+    }
+  }`;
+
+};
+
+
+
+export const GET_CLIENT_BY_PHONE_NUMBER_QUERY = (client_number: string)=>{
+
+  return gql`
+  {
+    users(mobileLike: "%${client_number}%")
+    {
+      id 
+      username
+      mobile 
+      address
+    }
+  }
+  `;
+
+};

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
-import { OrderInterface } from 'src/app/core/interfaces/orders.interface';
-import { ALL_ORDERS_STATE } from '../../store/orders.selectors';
+import { FullOrderDetailsInteface, OrderInterface } from 'src/app/core/interfaces/orders.interface';
+import { GET_ORDER_DETAILS_ACTION } from '../../store/orders.actions';
+import { ACTIVE_ORDER_DETAILS_SELECTOR, ALL_ORDERS_STATE } from '../../store/orders.selectors';
 
 @Component({
   selector: 'app-orders-all',
@@ -12,11 +13,26 @@ import { ALL_ORDERS_STATE } from '../../store/orders.selectors';
 export class OrdersAllComponent implements OnInit {
 
 
-  orders : any[] = [];
+  orders : OrderInterface[] = [];
   order_details : any[] = [];
   orders_date : Date = new Date();
-  
+  active_order_details: FullOrderDetailsInteface = {
+    id: 0,
+    taxes: 0,
+    total: 0,
+    sub_total: 0,
+    table: {
+       id: 0,
+       number: 0,
+       seats: 0
+    },
+    paymenttype: {
+      name: '--'
+    },
+    order_details: []
+ };
 
+ orders_total: number = 0;
 
   constructor(
     private store: Store<AppStates>
@@ -29,37 +45,7 @@ export class OrdersAllComponent implements OnInit {
     this.get_all_orders();
 
 
-
-    this.order_details = [
-      {
-        img: '../../../../../assets/icons/burger_circle.svg',
-        name: 'بيف برجر',
-        size: 'صغير',
-        quantity: 2,
-        price: 20
-      },
-      {
-        img: '../../../../../assets/icons/burger_circle.svg',
-        name: 'بيف برجر',
-        size: 'صغير',
-        quantity: 2,
-        price: 20
-      },
-      {
-        img: '../../../../../assets/icons/burger_circle.svg',
-        name: 'بيف برجر',
-        size: 'صغير',
-        quantity: 2,
-        price: 20
-      },
-      {
-        img: '../../../../../assets/icons/burger_circle.svg',
-        name: 'بيف برجر',
-        size: 'صغير',
-        quantity: 2,
-        price: 20
-      }
-    ];
+    this.get_active_order_details();
 
   }
 
@@ -74,7 +60,7 @@ export class OrdersAllComponent implements OnInit {
 
         this.orders = orders;
 
-        console.log("🎄: " , this.orders);
+      this.calculating_all_orders_total(orders);
 
       }
     );
@@ -83,6 +69,51 @@ export class OrdersAllComponent implements OnInit {
   }
 
 
+
+  show_order_details(order : any)
+  {
+
+    this.store.dispatch(GET_ORDER_DETAILS_ACTION({ order_id: order.id }));
+  }
+
+
+  get_active_order_details()
+  {
+
+    this.store.pipe( select(ACTIVE_ORDER_DETAILS_SELECTOR) ).subscribe(
+      (order_details: FullOrderDetailsInteface)=>{
+        this.active_order_details = order_details;
+      }
+    );
+
+
+  }
+
+
+
+  calculating_all_orders_total(orders : OrderInterface[])
+  {
+
+    let orders_total = 0;
+
+    // check if orders exists!
+    if ( orders.length != 0 )
+    {
+      
+      orders.forEach((order: OrderInterface)=>{
+        orders_total += order.total;
+      });
+
+    }
+    else
+    {
+      orders_total = 0;
+    }
+
+
+    this.orders_total = orders_total;
+
+  }
 
 
 }

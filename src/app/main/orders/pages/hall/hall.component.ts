@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { TABLES_SELECTOR } from '../../store/orders.selectors';
+import { AppStates } from 'src/app/core/interfaces/app.interface';
+import { SET_HOME_VIEW_MODE_ACTION } from '../../store/orders.actions';
+import { GET_HOME_STATE_MODE_SELECTOR } from '../../store/orders.selectors';
+
 
 
 
@@ -13,36 +16,42 @@ import { TABLES_SELECTOR } from '../../store/orders.selectors';
 export class HallComponent implements OnInit {
 
 
-  tables: any[] = [];
-
-  temp : any[] = [];
+  view: number = 1;
+  home_view_mode: number = 1;
 
   constructor(
-    private store: Store<any>
+    private store: Store<AppStates>
   ) { }
 
   ngOnInit(): void 
   {
 
-    this.get_tables();
+    this.listener_home_state_mode();
 
   }
 
 
 
-  get_tables()
+  changing_home_view(view_mode: number)
+  {
+    this.store.dispatch(SET_HOME_VIEW_MODE_ACTION({ home_view_mode: view_mode }));
+  }
+
+
+
+
+  listener_home_state_mode()
   {
 
-    this.store.pipe(select(TABLES_SELECTOR)).subscribe(
-      (response : any)=>{
-        this.tables = response;
-      },
-      (err)=>{
-        console.error(err);
+    this.store.pipe( select(GET_HOME_STATE_MODE_SELECTOR) ).subscribe(
+      (home_view_mode: number)=>{
+        this.home_view_mode = home_view_mode;
       }
     );
 
+
   }
+
 
 
 

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { ITEMS_RESULTS_TYPE } from 'src/app/core/enums/items_result_type.enum';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
-import { MenuInterface, MenuItemInterface } from 'src/app/core/interfaces/orders.interface';
+import { MenuInterface, MenuItemInterface, ReservationDataInterface, TableInterface } from 'src/app/core/interfaces/orders.interface';
 import { SET_ACTIVE_CATEGORY_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION } from '../../store/orders.actions';
-import { ACTIVE_CATEGORY_SELECTOR, ITEMS_RESULTS_TYPE_SELECTOR, MENU_SELECTOR, SEARCHED_ITEMS_SELECTOR } from '../../store/orders.selectors';
+import { ACTIVE_CATEGORY_SELECTOR, GET_ACTIVE_ORDER_SELECTOR, GET_ACTIVE_RESERVATION_SELECTOR, ITEMS_RESULTS_TYPE_SELECTOR, MENU_SELECTOR, SEARCHED_ITEMS_SELECTOR } from '../../store/orders.selectors';
 
 @Component({
   selector: 'app-menu',
@@ -21,6 +21,18 @@ export class MenuComponent implements OnInit {
   active_category: MenuInterface = { id: 0 , name: '', menu_categories_items: [] };
   search_results_for_items : MenuItemInterface[] = [];
   results_type: number = ITEMS_RESULTS_TYPE.menu;
+  reservation: ReservationDataInterface = {
+    table_id: 0,
+    waiter_id: 0,
+    created_by: 0,
+    id: 0
+ };
+ active_order: TableInterface = {
+  id: 0,
+  seats: 0,
+  number: 0 
+ };
+
 
   constructor(
     private router: Router,
@@ -42,6 +54,9 @@ export class MenuComponent implements OnInit {
     // get the items results display type
     this.get_items_results_type();
 
+    // get reservation data
+    this.get_reservation_data();
+
   }
 
 
@@ -52,7 +67,6 @@ export class MenuComponent implements OnInit {
 
     this.store.pipe( select(MENU_SELECTOR) ).subscribe(
       (state_data : MenuInterface[])=>{
-        console.log("🎈 : " , state_data);
 
         this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.menu }));
 
@@ -124,7 +138,6 @@ export class MenuComponent implements OnInit {
   load_category_food(menu: any)
   {
 
-    console.log(menu);
     this.store.dispatch(SET_ACTIVE_CATEGORY_ACTION({ active_category: menu }));
 
   }
@@ -145,8 +158,6 @@ export class MenuComponent implements OnInit {
     this.store.pipe( select(SEARCHED_ITEMS_SELECTOR) ).subscribe(
       (searched_items: MenuItemInterface[])=>{
 
-        console.log("👰🏻‍♀️👰🏻‍♀️👰🏻‍♀️ : ", searched_items);
-        
         this.search_results_for_items = searched_items;
 
         this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.search }));
@@ -169,6 +180,27 @@ export class MenuComponent implements OnInit {
 
   }
 
+
+
+
+  get_reservation_data()
+  {
+
+    this.store.pipe( select(GET_ACTIVE_RESERVATION_SELECTOR) ).subscribe(
+      (reservation: ReservationDataInterface)=>{
+        this.reservation = reservation;
+      }
+    );
+
+
+    this.store.pipe( select(GET_ACTIVE_ORDER_SELECTOR) ).subscribe(
+      (active_order: TableInterface)=>{
+        this.active_order = active_order;
+      }
+    );
+
+
+  }
 
 
 }

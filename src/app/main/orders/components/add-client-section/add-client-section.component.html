@@ -1,0 +1,38 @@
+<div class="d-flex h-100 justify-content-center align-items-center">
+
+   <div class="align-items-center d-flex flex-column outer-box p-5 rounded-5 shadow w-100">
+
+      <h1 class="title m-0">أضافة عميل</h1>
+
+      <form [formGroup]="add_client_form" class="dir-rtl mt-5 w-100 position-relative">
+         
+         <div>
+            <label for="name_input" class="form-label mb-2">الاسم</label>
+            <input class="border-dark form-control px-4 py-2 shadow-none" type="text" id="name_input" placeholder="الاسم" formControlName="username">
+         </div>
+
+         <div class="mt-3">
+            <label for="phone_num_input" class="form-label mb-2">رقم الهاتف</label>
+            <input class="border-dark form-control px-4 py-2 shadow-none" type="text" id="phone_num_input" placeholder="رقم الهاتف" formControlName="mobile">
+         </div>
+
+         <div class="mt-3">
+            <label for="address_input" class="form-label mb-2">العنوان</label>
+            <input class="border-dark form-control px-4 py-2 shadow-none" type="text" id="address_input" placeholder="العنوان" formControlName="address">
+         </div>
+
+
+
+         <div class="mt-5">
+            <button [disabled]="!add_client_form.valid" (click)="add_client();" type="button" class="align-items-center d-flex gap-3 justify-content-center px-4 py-3 rounded-3 w-100 add-btn">
+               <img src="../../../../../assets/icons/add_2.svg" width="14" height="14">
+               <span class="m-0 add-btn-text">أضف عميل</span>
+            </button>
+         </div>
+      
+      </form>
+
+
+   </div>
+
+</div>

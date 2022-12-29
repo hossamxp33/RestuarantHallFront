@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { MenuInterface, MenuItemInterface, OrderInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
+import { ClientInterface, FullOrderDetailsInteface, MenuInterface, MenuItemInterface, OrderInterface, ReservationDataInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -68,4 +68,36 @@ export const SEARCHED_ITEM_COMPLETE_ACTION = createAction(
 export const SET_SEARCH_RESULTS_TYPE_ACTION = createAction(
    "[orders controller] set search results type",
    props<{ search_results_type: number }>()
+);
+
+
+export const GET_ORDER_DETAILS_ACTION = createAction(
+   "[orders all page] getting order dertails",
+   props<{ order_id: number }>()
+);
+
+
+export const SAVE_ORDER_DETAILS_ACTION = createAction(
+   "[orders effects] save acttive order details",
+   props<{ order_details: FullOrderDetailsInteface }>()
+);
+
+export const SAVE_ACTIVE_ORDER_DATA_ACTION = createAction(
+   "[orders effects] save active reservation",
+   props<{ reservation: ReservationDataInterface }>()
+);
+
+export const SET_HOME_VIEW_MODE_ACTION = createAction(
+   "[hall controller] setting home view mode",
+   props<{ home_view_mode: number }>()
+);
+
+export const SEARCHING_CLIENT_PHONE_NUMBER_ACTION = createAction(
+   "[delievery section controller] searching client number",
+   props<{ client_number: string }>()
+);
+
+export const SAVE_CLIENTS_RESULTS_ACTION = createAction(
+   "[orders effects] saving clients results",
+   props<{ clients: ClientInterface[] }>()
 );

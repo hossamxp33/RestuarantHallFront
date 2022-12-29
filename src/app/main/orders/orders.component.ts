@@ -62,7 +62,6 @@ export class OrdersComponent implements OnInit {
     // START SEARCHING STARTING FROM 3 LETTERS
     if ( search_name.length >= 3 )
     {
-      console.log("🎄🎄🎄 : ", search_name);
       this.store.dispatch(SEARCH_ITEM_BY_NAME_ACTION({ search_string: search_name }));
     }
 

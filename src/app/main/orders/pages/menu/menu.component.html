@@ -43,7 +43,7 @@
 
          <div class="d-flex flex-row-reverse justify-content-between">
             <div>
-               <h1 class="m-0 header-title fw-bold">طلب #23</h1>
+               <h1 class="m-0 header-title fw-bold">طلب #{{ reservation.id || 0 }}</h1>
             </div>
    
             <div class="d-flex justify-content-center align-items-center">
@@ -55,12 +55,12 @@
 
             <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
                <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
-               <h1 class="title-txt tab-title m-0">طاولة: <span>2</span></h1>
+               <h1 class="title-txt tab-title m-0">طاولة: <span>{{ active_order.number || 0 }}</span></h1>
             </div>
    
             <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
                <img src="../../../../../assets/icons/people_light.svg" alt="home icon" width="20" height="20">
-               <h1 class="title-txt tab-title m-0">الضيوف: <span>4</span></h1>
+               <h1 class="title-txt tab-title m-0">الضيوف: <span>{{ active_order.seats || 0 }}</span></h1>
             </div>
    
          </div>

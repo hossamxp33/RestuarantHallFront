@@ -33,6 +33,8 @@
             <app-order-card 
             *ngFor="let order of orders;" 
             [order]="order"
+            (click)="show_order_details(order);"
+            class="cursor-pointer"
             >
             </app-order-card>
          </div>
@@ -42,7 +44,7 @@
 
             <div class="d-flex justify-content-between align-items-center flex-row-reverse w-100">
                <h2 class="m-0 transcript-title fw-bold">المجموع الكلي</h2>
-               <h2 class="m-0 transcript-price dir-rtl fw-bold">286 ر.س</h2>
+               <h2 class="m-0 transcript-price dir-rtl fw-bold">{{ orders_total }} ر.س</h2>
             </div>
 
 
@@ -62,7 +64,7 @@
 
          <div class="d-flex flex-row-reverse justify-content-between">
             <div>
-               <h1 class="m-0 header-title fw-bold">طلب #10</h1>
+               <h1 class="m-0 header-title fw-bold">طلب #{{ active_order_details.id || 0 }}</h1>
             </div>
          </div>
 
@@ -70,17 +72,17 @@
 
             <div class="d-inline-flex gap-2 flex-column align-items-center">
                <h1 class="table-meta text-muted m-0">الطاولة</h1>
-               <i class="font-style-normal fw-bold fs-6">12</i>
+               <i class="font-style-normal fw-bold fs-6">{{ active_order_details.table ? active_order_details.table.number : 0 }}</i>
             </div>
 
             <div class="d-inline-flex gap-2 flex-column align-items-center">
                <h1 class="table-meta text-muted m-0">الضيوف</h1>
-               <i class="font-style-normal fw-bold fs-6">2</i>
+               <i class="font-style-normal fw-bold fs-6">{{ active_order_details.table ? active_order_details.table.seats : 0 }}</i>
             </div>
 
             <div class="d-inline-flex gap-2 flex-column align-items-center">
                <h1 class="table-meta text-muted m-0">وسيلة الدفع</h1>
-               <i class="font-style-normal fw-bold fs-6">البطاقات الائتمانية</i>
+               <i class="font-style-normal fw-bold fs-6">{{ active_order_details.paymenttype ? active_order_details.paymenttype.name : "--" }}</i>
             </div>
    
          </div>
@@ -91,29 +93,29 @@
          </div>
 
          <div class="mt-4">
-            <h1 class="fs-5 fw-bold m-0 text-end">
-               <app-order-table [data]="order_details">
+            <div class="fs-5 fw-bold m-0 text-end order-details-table mb-3">
+               <app-order-table [data]="active_order_details.order_details">
                </app-order-table>
-            </h1>
+            </div>
          </div>
 
          <div class="d-flex flex-column gap-2 me-3 ms-5 my-4 pb-4 mt-0">
       
             <div class="d-flex justify-content-between align-items-center flex-row-reverse">
                <h2 class="m-0 transcript-title-2">المجموع</h2>
-               <h2 class="m-0 transcript-title-2 dir-rtl">100 ر.س</h2>
+               <h2 class="m-0 transcript-title-2 dir-rtl">{{ active_order_details.sub_total || 0 }} ر.س</h2>
             </div>
    
             <div class="d-flex justify-content-between align-items-center flex-row-reverse">
                <h2 class="m-0 transcript-title-2">الضريبة</h2>
-               <h2 class="m-0 transcript-title-2 dir-rtl">10 ر.س</h2>
+               <h2 class="m-0 transcript-title-2 dir-rtl">{{ active_order_details.taxes || 0 }} ر.س</h2>
             </div>
    
             <div class="divider border-bottom border-1 border-dark"></div>
    
             <div class="d-flex justify-content-between align-items-center flex-row-reverse">
                <h2 class="m-0 transcript-title fw-bold">المجموع</h2>
-               <h2 class="m-0 transcript-title dir-rtl fw-bold">110 ر.س</h2>
+               <h2 class="m-0 transcript-title dir-rtl fw-bold">{{ active_order_details.total || 0 }} ر.س</h2>
             </div>
 
    

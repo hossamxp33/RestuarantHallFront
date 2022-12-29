@@ -8,45 +8,19 @@
 
 
    <!-- header -->
-   <div class="border-3 border-bottom d-flex flex-row-reverse justify-content-between mx-5 py-4">
-      
-      <div>
-         <h1 class="m-0">الصالة</h1>
-      </div>
-      
+   <div class="border-3 border-bottom d-flex flex-row-reverse mx-5 py-4">
 
       <div class="d-flex gap-4 align-items-center flex-row-reverse">
-         <button class="btn floor-btn">الطابق الأول</button>
-         <button class="btn floor-btn" disabled>الطابق الثاني</button>
+         <button class="view-btn btn floor-btn" [ngClass]="{ 'active': home_view_mode == 1 }" (click)="changing_home_view(1);">الصالة</button>
+         <button class="view-btn btn floor-btn" [ngClass]="{ 'active': home_view_mode == 2 }" (click)="changing_home_view(2);">دليڤري</button>
       </div>
 
    </div>
 
 
    <!-- body -->
-   <div class="d-flex flex-column h-100 justify-content-between">
-
-      <!-- top -->
-      <div class="p-5 table-box row row-cols-5">
-         <app-table *ngFor="let table of tables;" [table]="table"></app-table>
-      </div>
-
-      <!-- bottom -->
-      <div class="box-inner-2-box-1-box-2 d-flex gap-5 justify-content-end px-5">
-
-         <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
-            <img src="../../../../../assets/icons/people.svg" alt="home icon" width="20" height="20">
-            <h1 class="title-txt tab-title m-0">الضيوف: <span>8</span></h1>
-         </div>
-
-         <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
-            <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
-            <h1 class="title-txt tab-title m-0">الطاولات المتوفرة: <span>10</span></h1>
-         </div>
-
-      </div>
-
-   </div>
-
+   <app-hall-section *ngIf="home_view_mode == 1"></app-hall-section>
+   <app-delivery-section *ngIf="home_view_mode == 2" class="h-100"></app-delivery-section>
+   <app-add-client-section *ngIf="home_view_mode == 3"></app-add-client-section>
 
 </div>

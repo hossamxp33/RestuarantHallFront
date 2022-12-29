@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { OrdersState } from "src/app/core/interfaces/orders.interface";
-import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, MENU_LOADED_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SET_ACTIVE_CATEGORY_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
+import { ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, MENU_LOADED_ACTION, SAVE_ACTIVE_ORDER_DATA_ACTION, SAVE_CLIENTS_RESULTS_ACTION, SAVE_ORDER_DETAILS_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SET_ACTIVE_CATEGORY_ACTION, SET_HOME_VIEW_MODE_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION, TABLES_LOADED_ACTION } from "./orders.actions";
 import { ORDERS_STATES } from "./orders.init";
 
 
@@ -94,6 +94,56 @@ export const ORDERS_REDUCERS = createReducer(
             search_results_type: action.search_results_type
          };
 
+
+         return new_state;
+      }
+   ),
+   on(
+      SAVE_ORDER_DETAILS_ACTION,
+      (state, action)=>{
+
+         let new_state = {
+            ...state,
+            active_order_details: action.order_details
+         };
+
+         return new_state;
+      }
+   ),
+   on(
+      SAVE_ACTIVE_ORDER_DATA_ACTION,
+      (state, action)=>{
+
+         let new_state = {
+            ...state,
+            reservation: action.reservation
+         };
+
+
+         return new_state;
+      }
+   ),
+   on(
+      SET_HOME_VIEW_MODE_ACTION,
+      (state, action)=>{
+
+         let new_state = {
+            ...state,
+            home_view_mode: action.home_view_mode
+         };
+
+
+         return new_state;
+      }
+   ),
+   on(
+      SAVE_CLIENTS_RESULTS_ACTION,
+      (state, action)=>{
+
+         let new_state= {
+            ...state,
+            searched_clients: action.clients
+         };
 
          return new_state;
       }

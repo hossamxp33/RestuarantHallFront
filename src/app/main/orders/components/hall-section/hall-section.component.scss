@@ -1,0 +1,29 @@
+
+.box-inner-2-box-1-box-2
+{
+   height: 100px;
+   z-index: 2;
+   background-color: var(--color-2);
+}
+
+
+.title-txt
+{
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 19px;
+   letter-spacing: 0.02em;
+   text-align: center;
+   font-style: normal;
+}
+
+.tab-title span
+{
+   color: var(--color-4);
+}
+
+.table-box
+{
+   overflow-y: scroll;
+   height: 445px;
+}

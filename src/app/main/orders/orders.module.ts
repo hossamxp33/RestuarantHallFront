@@ -14,6 +14,9 @@ import { OrdersAllComponent } from './pages/orders-all/orders-all.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { OrderTableComponent } from './components/order-table/order-table.component';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
+import { HallSectionComponent } from './components/hall-section/hall-section.component';
+import { DeliverySectionComponent } from './components/delivery-section/delivery-section.component';
+import { AddClientSectionComponent } from './components/add-client-section/add-client-section.component';
 
 
 
@@ -37,7 +40,10 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
       OrdersAllComponent,
       OrderCardComponent,
       OrderTableComponent,
-      OrderDetailComponent
+      OrderDetailComponent,
+      HallSectionComponent,
+      DeliverySectionComponent,
+      AddClientSectionComponent
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),

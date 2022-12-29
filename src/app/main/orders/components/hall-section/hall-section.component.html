@@ -1,0 +1,23 @@
+<div class="d-flex flex-column h-100 justify-content-between">
+
+   <!-- top -->
+   <div class="p-5 table-box row row-cols-5">
+      <app-table *ngFor="let table of tables;" [table]="table"></app-table>
+   </div>
+
+   <!-- bottom -->
+   <div class="box-inner-2-box-1-box-2 d-flex gap-5 justify-content-end px-5">
+
+      <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+         <img src="../../../../../assets/icons/people.svg" alt="home icon" width="20" height="20">
+         <h1 class="title-txt tab-title m-0">الضيوف: <span>8</span></h1>
+      </div>
+
+      <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
+         <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
+         <h1 class="title-txt tab-title m-0">الطاولات المتوفرة: <span>10</span></h1>
+      </div>
+
+   </div>
+
+</div>

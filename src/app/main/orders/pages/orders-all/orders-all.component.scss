@@ -120,3 +120,11 @@
    letter-spacing: 0em;
    
 }
+
+
+.order-details-table
+{
+   max-height: 282px !important;
+   overflow-y: scroll;
+   overflow-x: hidden;
+}

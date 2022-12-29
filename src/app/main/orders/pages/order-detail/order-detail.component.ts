@@ -175,8 +175,6 @@ export class OrderDetailComponent implements OnInit {
   print_transcript(print_transcript : any)
   {
 
-    console.log(print_transcript);
-
     this.printPageArea(print_transcript);
 
   }

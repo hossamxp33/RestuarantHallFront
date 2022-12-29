@@ -65,7 +65,6 @@ export class AuthEffects
    
                this.graph_s.query(GET_RESTAURANT_DATA).subscribe(
                   (response: any)=>{
-                     console.log("🎄 : ", response);
 
                      this.store.dispatch(RESTAURANT_DATA_LOADED_ACTION( { restaurant_data: response.data.restaurants[0]} ));
 

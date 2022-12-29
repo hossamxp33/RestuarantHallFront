@@ -42,3 +42,29 @@ export const ITEMS_RESULTS_TYPE_SELECTOR = createSelector(
    (app_state: AppStates)=> app_state.orders,
    (orders_state: OrdersState)=> orders_state.search_results_type
 );
+
+
+export const ACTIVE_ORDER_DETAILS_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.active_order_details 
+);
+
+export const GET_ACTIVE_RESERVATION_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state)=> orders_state.reservation
+);
+
+export const GET_ACTIVE_ORDER_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.active_order_table
+);
+
+export const GET_HOME_STATE_MODE_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.home_view_mode
+);
+
+export const GET_CLIENTS_RESULTS_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.searched_clients
+);

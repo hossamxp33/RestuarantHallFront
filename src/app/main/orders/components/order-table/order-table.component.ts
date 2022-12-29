@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-order-table',
@@ -9,7 +10,8 @@ export class OrderTableComponent implements OnInit {
 
   
   @Input('data') data : any;
-  image_url : string = '';
+  image_url : string = environment.img_url + '/';
+  place_holder_img: string = '../../../../../assets/icons/imae_placeholder.png';
 
   constructor() { }
 
