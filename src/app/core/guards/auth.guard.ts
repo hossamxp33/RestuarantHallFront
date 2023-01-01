@@ -1,6 +1,10 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { select, Store } from "@ngrx/store";
 import { CookieService } from "ngx-cookie-service";
+import { USER_SELECTOR } from "src/app/main/auth/store/auth.selectors";
+import { AppStates } from "../interfaces/app.interface";
+import { UserInterface } from "../interfaces/auth.interface";
 
 
 
@@ -12,30 +16,35 @@ import { CookieService } from "ngx-cookie-service";
 export class AuthGuard implements CanActivate
 {
 
+   result: boolean = false;
 
    constructor(
       private router: Router,
-      private cookie_s: CookieService
+      private store: Store<AppStates>
    ) {}
 
 
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean 
    {
    
-      let user_state = this.cookie_s.get('user');
-
-      if ( user_state )
-      {
-         return true;
-      }
-      else
-      {
-
-         this.router.navigateByUrl("/");
-         return false;
-      }
+      this.result = false;
       
+      this.store.pipe( select(USER_SELECTOR) ).subscribe(
+         (user_data: UserInterface)=>{
 
+            if ( user_data.token )
+            {
+               this.result = true;
+            }
+            else
+            {
+               this.result = false;
+            }
+         }
+      );
+
+      if ( !this.result ) this.router.navigateByUrl('/');
+      return this.result;
    }
 
 

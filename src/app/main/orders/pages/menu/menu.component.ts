@@ -27,11 +27,14 @@ export class MenuComponent implements OnInit {
     created_by: 0,
     id: 0
  };
+
  active_order: TableInterface = {
   id: 0,
   seats: 0,
   number: 0 
  };
+
+ active_menu_index: number = 0;
 
 
   constructor(
@@ -67,7 +70,7 @@ export class MenuComponent implements OnInit {
 
     this.store.pipe( select(MENU_SELECTOR) ).subscribe(
       (state_data : MenuInterface[])=>{
-
+      
         this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.menu }));
 
         this.menus = state_data;
@@ -88,7 +91,8 @@ export class MenuComponent implements OnInit {
 
     this.store.pipe( select(ACTIVE_CATEGORY_SELECTOR) ).subscribe(
       (active_category : MenuInterface)=>{
-        
+
+ 
         this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.menu }));
 
         this.active_category = active_category;
@@ -101,11 +105,11 @@ export class MenuComponent implements OnInit {
 
 
 
-  menu_category_clicked( menu_cat_item : any, menu: any)
+  menu_category_clicked(active_menu_index: number, menu: any)
   {
 
     // change active category
-    this.change_active_category(menu_cat_item);
+    this.change_active_category(active_menu_index);
 
     // load corresponding food based on categories
     this.load_category_food(menu);
@@ -113,24 +117,9 @@ export class MenuComponent implements OnInit {
   }
 
 
-  change_active_category(menu_cat_item : any)
+  change_active_category(active_menu_index: number)
   {
-
-
-    // get all the dom elements of ment category
-    let temp = document.querySelectorAll(".menu-cat");    
-    let menu_categories_items = Array.from(temp);
-
-
-    // remove 'active' from all categories 
-    menu_categories_items.forEach((item: any)=>{
-      item.classList.remove('active');
-    });
-
-
-    // add 'active' to clicked  
-    menu_cat_item.classList.add('active');
-  
+    this.active_menu_index = active_menu_index;
   }
 
 
@@ -152,15 +141,19 @@ export class MenuComponent implements OnInit {
 
 
 
-  get_search_results()
+   get_search_results()
   {
 
     this.store.pipe( select(SEARCHED_ITEMS_SELECTOR) ).subscribe(
       (searched_items: MenuItemInterface[])=>{
 
-        this.search_results_for_items = searched_items;
-
-        this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.search }));
+        if ( searched_items.length != 0 )
+        {
+          this.search_results_for_items = searched_items;
+  
+          this.store.dispatch(SET_SEARCH_RESULTS_TYPE_ACTION({ search_results_type: ITEMS_RESULTS_TYPE.search }));
+        }
+        
 
       }
     );

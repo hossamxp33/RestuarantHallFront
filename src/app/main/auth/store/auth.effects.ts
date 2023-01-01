@@ -6,6 +6,7 @@ import { CookieService } from "ngx-cookie-service";
 import { tap } from "rxjs";
 import { AppStates } from "src/app/core/interfaces/app.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
+import { environment } from "src/environments/environment";
 import { GET_RESTAURANT_DATA } from "../graph/auth.query";
 import { GET_RESTAURANT_DATA_ACTION, RESTAURANT_DATA_LOADED_ACTION, sign_in_action, sign_out_action } from "./auth.actions";
 
@@ -24,10 +25,7 @@ export class AuthEffects
          {
 
             // save user data
-            this.cookie_s.set('user' , JSON.stringify(action.user));
-
-            // get restautant data
-            this.store.dispatch(GET_RESTAURANT_DATA_ACTION());
+            this.cookie_s.set('user' , JSON.stringify(action.user) , undefined , '/');
 
             // redirect to home page
             this.router.navigateByUrl("/orders/hall");
@@ -43,9 +41,9 @@ export class AuthEffects
             ofType(sign_out_action),
             tap((action)=>
             {
-            
+               
                // delete user data
-               this.cookie_s.delete("user");
+               this.cookie_s.deleteAll('/');
             
                // redirect to sign-in page
                this.router.navigateByUrl("/");
@@ -81,20 +79,6 @@ export class AuthEffects
    );
 
 
-   // loaded_restaurant_details$ = createEffect(
-   //    ()=>{
-
-   //       return this.actions$.pipe(
-   //          ofType(RESTAURANT_DATA_LOADED_ACTION),
-   //          tap((action)=>{
-
-
-   //          })
-   //       )
-
-   //    },
-   //    { dispatch: false }
-   // );
 
 
    constructor(

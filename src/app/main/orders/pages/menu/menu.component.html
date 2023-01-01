@@ -18,8 +18,8 @@
          </div>
 
          <div class="d-flex gap-2 my-3 categories-box justify-content-start flex-row-reverse flex-wrap">
-            <h2 #menu_cat_item (click)="menu_category_clicked(menu_cat_item , menu);" class="px-2 menu-cat cursor-pointer" 
-            [ngClass]="{ 'active' : active_category_index == i }" *ngFor="let menu of menus; let i = index;">
+            <h2  (click)="menu_category_clicked(i , menu);" class="px-2 menu-cat cursor-pointer" 
+            [ngClass]="{ 'active' : active_menu_index == i }" *ngFor="let menu of menus; let i = index;">
                {{ menu?.name }}
             </h2>
          </div>

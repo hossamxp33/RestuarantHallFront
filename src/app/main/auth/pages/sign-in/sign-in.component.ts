@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import gql from 'graphql-tag';
+import { Store } from '@ngrx/store';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthState, UserInterface } from 'src/app/core/interfaces/auth.interface';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { GraphQLService } from 'src/app/core/services/graphql.service';
@@ -21,11 +21,10 @@ export class SignInComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
-    private auth_s: AuthService,
     private fb: FormBuilder,
     private store: Store<AuthState>,
-    private graph_s: GraphQLService
+    private graph_s: GraphQLService,
+    private cookie_s: CookieService
   ) { }
 
   ngOnInit(): void 
@@ -33,6 +32,10 @@ export class SignInComponent implements OnInit {
 
     // craete sign-in form
     this.create_form();
+
+    // auto-login if user signed-in (token exists!)
+    this.check_user_status();
+
 
   }
 
@@ -86,6 +89,28 @@ export class SignInComponent implements OnInit {
 
 
   }
+
+
+
+  check_user_status()
+  {
+
+    let temp = this.cookie_s.get('user');
+
+    if ( temp )
+    {
+
+      let user_data : UserInterface = JSON.parse(temp);
+
+      console.log(user_data);
+
+      // auto sign-in
+      this.store.dispatch(sign_in_action({ user: { BranchId: user_data.BranchId, token: user_data.token, vendorId: user_data.vendorId } }));
+    
+    }
+
+  }
+
 
 
 

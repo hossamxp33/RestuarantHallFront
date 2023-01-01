@@ -3,9 +3,9 @@ import { select, Store } from '@ngrx/store';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
 import { RestaurantDataInterface } from 'src/app/core/interfaces/auth.interface';
 import { environment } from 'src/environments/environment';
-import { sign_out_action } from '../auth/store/auth.actions';
+import { GET_RESTAURANT_DATA_ACTION, sign_out_action } from '../auth/store/auth.actions';
 import { RESTAURANT_DATA_SELECTOR } from '../auth/store/auth.selectors';
-import { SEARCH_ITEM_BY_NAME_ACTION } from './store/orders.actions';
+import { SEARCHED_ITEM_COMPLETE_ACTION, SEARCH_ITEM_BY_NAME_ACTION } from './store/orders.actions';
 
 @Component({
   selector: 'app-orders',
@@ -30,6 +30,10 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void 
   {
 
+    // request restautant data
+    this.store.dispatch(GET_RESTAURANT_DATA_ACTION());
+
+    // 
     this.get_restaurant_data();
 
   }
@@ -57,13 +61,17 @@ export class OrdersComponent implements OnInit {
   {
 
     let search_name = search_string.target.value;
-    
-    
+
     // START SEARCHING STARTING FROM 3 LETTERS
     if ( search_name.length >= 3 )
     {
       this.store.dispatch(SEARCH_ITEM_BY_NAME_ACTION({ search_string: search_name }));
     }
+    else if ( search_name == '' )
+    {
+      this.store.dispatch(SEARCHED_ITEM_COMPLETE_ACTION( {searched_items: []} ));
+    }
+
 
   }
 

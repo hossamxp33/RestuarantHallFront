@@ -23,7 +23,7 @@ export class FoodCardComponent implements OnInit {
 
   ngOnInit(): void 
   {
-
+ 
   }
 
 
