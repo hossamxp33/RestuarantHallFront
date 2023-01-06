@@ -21,7 +21,6 @@ export const GET_HALL_TABLE_QUERY = gql`
 `;
 
 
-
 export const GET_MENU_QUERY = gql`
   {
     menuCategories(vendor_id: ${environment.vendor_id}) 
@@ -50,7 +49,7 @@ export const GET_MENU_QUERY = gql`
         }
       }
     }
-  }`;
+}`;
 
 
 export const GET_ALL_ORDERS_QUERY = (filter_date : string)=>{
@@ -88,6 +87,7 @@ export const SEARCH_ITEMS_BY_NAME_QUERY = (search_string : string)=>{
 
 }
 
+
 export const GET_SINGLE_ORDER_DETAILS_QUERY = (order_id: number)=>{   // test with=> (order_id: 2405)
 
   return gql`
@@ -120,7 +120,6 @@ export const GET_SINGLE_ORDER_DETAILS_QUERY = (order_id: number)=>{   // test wi
 };
 
 
-
 export const GET_CLIENT_BY_PHONE_NUMBER_QUERY = (client_number: string)=>{
 
   return gql`
@@ -138,7 +137,6 @@ export const GET_CLIENT_BY_PHONE_NUMBER_QUERY = (client_number: string)=>{
 };
 
 
-
 export const GET_RESTAURANT_DATA =  gql`{
   restaurants(id: ${environment.vendor_id}) {
      id
@@ -149,3 +147,6 @@ export const GET_RESTAURANT_DATA =  gql`{
      service
   }
 }`;
+
+
+export const GET_TABLE_ORDER_CART_ITEMS_QUERY = gql``

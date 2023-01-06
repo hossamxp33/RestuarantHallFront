@@ -1,15 +1,15 @@
 import { Injectable, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { select, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { CookieService } from "ngx-cookie-service";
 import { tap } from "rxjs";
 import { AppStates } from "src/app/core/interfaces/app.interface";
-import { CartInterface, MenuItemInterface } from "src/app/core/interfaces/orders.interface";
+import { MenuItemInterface } from "src/app/core/interfaces/orders.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
 import { OrdersService } from "src/app/core/services/orders.service";
 import { GET_ALL_ORDERS_QUERY, GET_CLIENT_BY_PHONE_NUMBER_QUERY, GET_HALL_TABLE_QUERY, GET_MENU_QUERY, GET_RESTAURANT_DATA, GET_SINGLE_ORDER_DETAILS_QUERY, SEARCH_ITEMS_BY_NAME_QUERY } from "../graph/orders.query";
-import { ADD_ITEM_TO_CART_ACTION, ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, UPDATE_CART_TOTAL_ACTION, EDIT_ORDER_ACTION, GET_ORDER_DETAILS_ACTION, LOAD_ALL_ORDERS_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, SAVE_ACTIVE_ORDER_DATA_ACTION, SAVE_CLIENTS_RESULTS_ACTION, SAVE_ORDER_DETAILS_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SEARCHING_CLIENT_PHONE_NUMBER_ACTION, SEARCH_ITEM_BY_NAME_ACTION, SET_ACTIVE_TABLE_ACTION, TABLES_LOADED_ACTION, UPDATE_CART_SUB_TOTAL_ACTION, GET_RESTAURANT_DATA_ACTION, RESTAURANT_DATA_LOADED_ACTION, DELETE_CART_ITEM_ACTION, CHANGED_CART_ITEM_QUANTITY_ACTION, UPDATE_CART_ITEM_TOTAL_ACTION } from "./orders.actions";
+import { ADD_ITEM_TO_CART_ACTION, ADD_ORDER_BY_TABLE_ACTION, ALL_ORDERS_LOADED_ACTION, UPDATE_CART_TOTAL_ACTION, EDIT_ORDER_ACTION, GET_ORDER_DETAILS_ACTION, LOAD_ALL_ORDERS_ACTION, LOAD_ALL_TABLES_ACTION, LOAD_MENU_ACTION, MENU_LOADED_ACTION, SAVE_ACTIVE_ORDER_DATA_ACTION, SAVE_CLIENTS_RESULTS_ACTION, SAVE_ORDER_DETAILS_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SEARCHING_CLIENT_PHONE_NUMBER_ACTION, SEARCH_ITEM_BY_NAME_ACTION, SET_ACTIVE_TABLE_ACTION, TABLES_LOADED_ACTION, UPDATE_CART_SUB_TOTAL_ACTION, GET_RESTAURANT_DATA_ACTION, RESTAURANT_DATA_LOADED_ACTION, DELETE_CART_ITEM_ACTION, CHANGED_CART_ITEM_QUANTITY_ACTION, UPDATE_CART_ITEM_TOTAL_ACTION, GET_TABLE_ORDER_CART_ITEMS_ACTION } from "./orders.actions";
 
 
 
@@ -84,34 +84,6 @@ export class HallEffects implements OnInit
       { dispatch: false }
    );
 
-
-   add_order$ = createEffect(
-      ()=>{
-
-         return this.actions$.pipe(
-            ofType(ADD_ORDER_BY_TABLE_ACTION),
-            tap((action)=>{
-
-               this.orders_s.add_order_by_table(action.table).subscribe(
-                  (response : any)=>{
-
-                     this.store.dispatch(SAVE_ACTIVE_ORDER_DATA_ACTION({ reservation: response }))
-         
-                     // redirect to menu view
-                     this.router.navigateByUrl('/orders/menu');
-         
-                  },
-                  (err)=>{
-                     console.error(err);
-                  }
-               );
-
-            })
-         );
-         
-      },
-      { dispatch :false }
-   );
 
    
 
@@ -288,7 +260,11 @@ export class HallEffects implements OnInit
                   }
                   else
                   {
-                     // table not available, already have order, redirect to menu
+                     
+                     // table not available, already have order, get order details(cart items of order) then redirect to menu
+                     this.store.dispatch( GET_TABLE_ORDER_CART_ITEMS_ACTION() );
+                     
+                     
                      // redirect to menu view
                      this.router.navigateByUrl('/orders/menu');
                      
@@ -303,6 +279,52 @@ export class HallEffects implements OnInit
       { dispatch: false }
    );
 
+
+   
+   add_order$ = createEffect(
+      ()=>{
+
+         return this.actions$.pipe(
+            ofType(ADD_ORDER_BY_TABLE_ACTION),
+            tap((action)=>{
+
+               this.orders_s.add_order_by_table(action.table).subscribe(
+                  (response : any)=>{
+
+                     this.store.dispatch(SAVE_ACTIVE_ORDER_DATA_ACTION({ reservation: response }))
+         
+                     // redirect to menu view
+                     this.router.navigateByUrl('/orders/menu');
+         
+                  },
+                  (err)=>{
+                     console.error(err);
+                  }
+               );
+
+            })
+         );
+         
+      },
+      { dispatch :false }
+   );
+
+
+   get_table_order_cart_items$ = createEffect(
+      ()=>{
+
+         return this.actions$.pipe( ofType(GET_TABLE_ORDER_CART_ITEMS_ACTION) , tap(
+            ()=>{
+
+               this.query_s.query(  );
+
+
+            }
+         ))
+
+      },
+      { dispatch: false }
+   );
 
    
    loading_restaurant_data$ = createEffect(
