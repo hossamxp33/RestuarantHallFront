@@ -159,3 +159,7 @@ export const UPDATE_CART_ITEM_TOTAL_ACTION = createAction(
    "[orders effect] updating cart single item total",
    props<{ item_id: number }>()
 );
+
+export const RESET_ALL_ORDER_STATE_ACTION = createAction(
+   "[auth effect/sign-out] reset all orders state"
+);

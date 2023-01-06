@@ -1,6 +1,6 @@
 
 import { createReducer, on } from "@ngrx/store";
-import { sign_in_action, sign_out_action } from "./auth.actions";
+import { RESET_ALL_AUTH_STATE_ACTION, sign_in_action, sign_out_action } from "./auth.actions";
 import { Auth_STATES } from "./auth.init";
 
 
@@ -37,6 +37,18 @@ export const Auth_REDUCER = createReducer(
             }
          };
 
+      }
+   ),
+   on(
+      RESET_ALL_AUTH_STATE_ACTION,
+      (state, action)=>{
+
+         let new_state = { 
+            ...state,
+            ...Auth_STATES
+         }
+         
+         return new_state;
       }
    )
 );

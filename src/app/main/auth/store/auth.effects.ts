@@ -6,7 +6,8 @@ import { CookieService } from "ngx-cookie-service";
 import { tap } from "rxjs";
 import { AppStates } from "src/app/core/interfaces/app.interface";
 import { GraphQLService } from "src/app/core/services/graphql.service";
-import { sign_in_action, sign_out_action } from "./auth.actions";
+import { RESET_ALL_ORDER_STATE_ACTION } from "../../orders/store/orders.actions";
+import { RESET_ALL_AUTH_STATE_ACTION, sign_in_action, sign_out_action } from "./auth.actions";
 
 
 
@@ -45,6 +46,10 @@ export class AuthEffects
             
                // redirect to sign-in page
                this.router.navigateByUrl("/");
+
+               // reset all states
+               this.store.dispatch( RESET_ALL_AUTH_STATE_ACTION() );
+               this.store.dispatch( RESET_ALL_ORDER_STATE_ACTION() );
             
             })
          );
