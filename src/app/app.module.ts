@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
-import { FoodModalComponent } from './components/food-modal/food-modal.component';
 import { GraphQLModule } from './core/modules/graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
@@ -19,8 +18,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { STORE_CONFIG } from './store.config';
 @NgModule({
   declarations: [
-    AppComponent,
-    FoodModalComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { ClientInterface, FullOrderDetailsInteface, MenuInterface, MenuItemInterface, OrderInterface, ReservationDataInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
+import { ClientInterface, EditOrderInterface, FullOrderDetailsInteface, MenuInterface, MenuItemInterface, OrderInterface, ReservationDataInterface, RestaurantDataInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -9,13 +9,16 @@ export const LOAD_ALL_TABLES_ACTION = createAction(
 );
 
 
-
 export const TABLES_LOADED_ACTION = createAction(
    "[hall effect] tables data loaded",
    props<{ tables: TableInterface[] }>()
 );
 
 
+export const SET_ACTIVE_TABLE_ACTION = createAction(
+   "[table controller] setting active table",
+   props<{ active_table: TableInterface }>()
+);
 
 export const ADD_ORDER_BY_TABLE_ACTION = createAction(
    "[table controller] add order to table",
@@ -100,4 +103,59 @@ export const SEARCHING_CLIENT_PHONE_NUMBER_ACTION = createAction(
 export const SAVE_CLIENTS_RESULTS_ACTION = createAction(
    "[orders effects] saving clients results",
    props<{ clients: ClientInterface[] }>()
+);
+
+export const EDIT_ORDER_ACTION = createAction(
+   "[hall controller] editing existing order",
+   props<{ order: EditOrderInterface }>()
+);
+
+
+export const TOGGLE_FOOD_MODAL_ACTION = createAction(
+   "[food modal controller] toggling modal visibility",
+   props<{ visibility_status: boolean }>()
+);
+
+
+export const SET_ACTIVE_FOOD_ITEM_ACTION = createAction(
+   "[food card controller] setting active food item",
+   props<{ food_item: MenuItemInterface }>()
+);
+
+export const ADD_ITEM_TO_CART_ACTION = createAction(
+   "[food modal controller] add item to cart",
+   props<{ food_item: MenuItemInterface }>()
+);
+
+export const DELETE_CART_ITEM_ACTION = createAction(
+   "[card food cart controller] deleting cart item",
+   props<{ item_id: number }>()
+);
+
+
+export const CHANGED_CART_ITEM_QUANTITY_ACTION = createAction(
+   "[card food cart controller] changed cart item quantity",
+   props<{ order_id: number , operation_type: "plus" | "minus" }>()
+);
+
+export const UPDATE_CART_SUB_TOTAL_ACTION = createAction(
+   "[orders effect] update sub-total of cart"
+);
+
+export const UPDATE_CART_TOTAL_ACTION = createAction(
+   "[orders effect]  update total of cart"
+);
+
+export const GET_RESTAURANT_DATA_ACTION = createAction(
+   "[app controller] get restaurant data"
+);
+
+export const RESTAURANT_DATA_LOADED_ACTION = createAction(
+   "[orders effects] saving restaurant data",
+   props<{ restaurant_data: RestaurantDataInterface }>()
+);
+
+export const UPDATE_CART_ITEM_TOTAL_ACTION = createAction(
+   "[orders effect] updating cart single item total",
+   props<{ item_id: number }>()
 );

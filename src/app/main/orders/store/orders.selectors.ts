@@ -1,6 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { AppStates } from "src/app/core/interfaces/app.interface";
-import { OrdersState } from "src/app/core/interfaces/orders.interface";
+import { ActiveTableInterface, OrdersState } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -49,14 +49,10 @@ export const ACTIVE_ORDER_DETAILS_SELECTOR = createSelector(
    (orders_state: OrdersState)=> orders_state.active_order_details 
 );
 
-export const GET_ACTIVE_RESERVATION_SELECTOR = createSelector(
-   (app_state: AppStates)=> app_state.orders,
-   (orders_state)=> orders_state.reservation
-);
 
-export const GET_ACTIVE_ORDER_SELECTOR = createSelector(
+export const GET_ACTIVE_TABLE_SELECTOR = createSelector(
    (app_state: AppStates)=> app_state.orders,
-   (orders_state: OrdersState)=> orders_state.active_order_table
+   (orders_state: OrdersState)=> orders_state.active_table
 );
 
 export const GET_HOME_STATE_MODE_SELECTOR = createSelector(
@@ -67,4 +63,24 @@ export const GET_HOME_STATE_MODE_SELECTOR = createSelector(
 export const GET_CLIENTS_RESULTS_SELECTOR = createSelector(
    (app_state: AppStates)=> app_state.orders,
    (orders_state: OrdersState)=> orders_state.searched_clients
+);
+
+export const GET_FOOD_MODAL_VISIBILITY_STATUS_SELECTOR = createSelector(
+   (app_states: AppStates)=> app_states.orders,
+   (order_states: OrdersState)=> order_states.food_modal_visibility_status
+);
+
+export const GET_SELECTED_FOOD_ITEM = createSelector(
+   (app_states: AppStates)=> app_states.orders,
+   (orders_state: OrdersState)=> orders_state.selected_food_item
+);
+
+export const GET_CART_ITEMS_SELECTOR = createSelector(
+   (app_states: AppStates)=> app_states.orders,
+   (orders_states: OrdersState)=> orders_states.cart
+);
+
+export const RESTAURANT_DATA_SELECTOR = createSelector(
+   (app_state: AppStates)=> app_state.orders,
+   (orders_state: OrdersState)=> orders_state.restautant_data
 );

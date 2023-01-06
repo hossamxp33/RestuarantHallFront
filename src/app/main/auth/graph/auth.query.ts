@@ -16,12 +16,3 @@ export const SIGN_IN_QUERY = gql`mutation {
 }`;
 
 
-
-export const GET_RESTAURANT_DATA =  gql`{
-   restaurants(id: ${environment.vendor_id}) {
-      id
-      name
-      logo
-      cover
-   }
-}`;

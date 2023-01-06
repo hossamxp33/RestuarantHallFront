@@ -14,7 +14,12 @@ export class OrderCardComponent implements OnInit {
     table: {
       id: 0,
       seats: 0,
-      number: 0    
+      number: 0,
+      isAvail: false,
+      waiterId: 0,
+      waiterName: '',
+      orderId: 0,
+      modified: ''    
     },
     total: 0
   };

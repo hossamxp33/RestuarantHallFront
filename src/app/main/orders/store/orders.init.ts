@@ -6,11 +6,24 @@ import { OrdersState } from "src/app/core/interfaces/orders.interface";
 
 
 export const ORDERS_STATES : OrdersState = {
+   home_view_mode: 1,
    tables: [],
-   active_order_table: {
-      id: 0,
-      number: 0,
-      seats: 0
+   active_table: {
+      table: {
+         id: 0,
+         number: 0,
+         seats: 0,
+         isAvail: false,
+         orderId: 0,
+         waiterId: 0,
+         waiterName: "",
+         modified: ''
+      },
+      paymenttype: {
+         name: '',
+         id: 0
+      },
+      order_details: []
    },
    menu: [],
    active_menu_category: {
@@ -18,9 +31,22 @@ export const ORDERS_STATES : OrdersState = {
       name: '',
       menu_categories_items: []
    },
-   orders: [],
+   food_modal_visibility_status: false,
+   selected_food_item: {
+      id: 0,
+      photo: "",
+      name: "",
+      description: "",
+      price: 0,
+      quantity: 1,
+      total: 0,
+      note: '',
+      selected_options: [],
+      menu_options_topics: []
+   },
    search_results_type: ITEMS_RESULTS_TYPE.menu,
    searched_items: [],
+   orders: [],
    active_order_details: {
       id: 0,
       taxes: 0,
@@ -29,19 +55,30 @@ export const ORDERS_STATES : OrdersState = {
       table: {
          id: 0,
          number: 0,
-         seats: 0
+         seats: 0,
+         isAvail: false,
+         waiterId: 0,
+         waiterName: "",
+         orderId: 0,
+         modified: ''
       },
       paymenttype: {
          name: ''
       },
       order_details: []
    },
-   reservation: {
-      table_id: 0,
-      waiter_id: 0,
-      created_by: 0,
-      id: 0
+   searched_clients: [],
+   restautant_data: {
+      cover: '',
+      id: 0,
+      logo: '',
+      name: '',
+      taxes: 0,
+      service: 0
    },
-   home_view_mode: 1,
-   searched_clients: []
+   cart: {
+      cart_items: [],
+      sub_total: 0,
+      total: 0
+   }
 };

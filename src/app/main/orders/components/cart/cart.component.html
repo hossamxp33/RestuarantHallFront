@@ -3,7 +3,7 @@
 
 
 <!-- orders exists -->
-<div class="d-flex flex-column orders-container" *ngIf="orders.length != 0">
+<div class="d-flex flex-column orders-container" *ngIf="cart.cart_items.length != 0">
    
    <div class="d-flex flex-column sections-box">
       
@@ -14,18 +14,12 @@
       
 
       <div class="d-flex flex-column gap-3 me-3 my-4 pb-4">
-         <div class="align-items-center check-all-box d-flex gap-2" *ngFor="let order of orders;">
+         <div class="align-items-center check-all-box d-flex gap-2" *ngFor="let order of cart.cart_items;">
             
             <input id="checkbox_2" type="checkbox" class="m-0 border border-2 border-success checkbox-1 form-check-input rounded-3 shadow-none">
             
             <div>
-               <app-cart-food-card 
-               [food_img]="order?.img"
-               [food_name]="order?.name"
-               [food_size]="order?.size"
-               [food_price]="order?.price"
-               >
-               </app-cart-food-card>
+               <app-cart-food-card [order]="order"></app-cart-food-card>
             </div>
          
          </div>
@@ -36,19 +30,24 @@
       
          <div class="d-flex justify-content-between align-items-center flex-row-reverse">
             <h2 class="m-0 transcript-title">المجموع</h2>
-            <h2 class="m-0 transcript-title dir-rtl">42 ر.س</h2>
+            <h2 class="m-0 transcript-title dir-rtl">{{ cart.sub_total }} ج.م</h2>
          </div>
 
          <div class="d-flex justify-content-between align-items-center flex-row-reverse">
             <h2 class="m-0 transcript-title">الضريبة</h2>
-            <h2 class="m-0 transcript-title dir-rtl">2 ر.س</h2>
+            <h2 class="m-0 transcript-title dir-rtl">{{ restaurant_data.taxes }} ج.م</h2>
+         </div>
+
+         <div class="d-flex justify-content-between align-items-center flex-row-reverse">
+            <h2 class="m-0 transcript-title">الخدمة</h2>
+            <h2 class="m-0 transcript-title dir-rtl">{{ restaurant_data.service }} ج.م</h2>
          </div>
 
          <div class="divider border-bottom border-1 pb-2"></div>
 
          <div class="d-flex justify-content-between align-items-center flex-row-reverse">
             <h2 class="m-0 transcript-title fw-bold">المجموع الكلي</h2>
-            <h2 class="m-0 transcript-title dir-rtl fw-bold">44 ر.س</h2>
+            <h2 class="m-0 transcript-title dir-rtl fw-bold">{{ cart.total }} ج.م</h2>
          </div>
 
          <div class="d-flex justify-content-between align-items-center flex-row-reverse mt-4">
@@ -71,7 +70,7 @@
 
 
 <!-- no orders -->
-<div class="d-flex flex-column h-100" *ngIf="orders.length == 0">
+<div class="d-flex flex-column h-100" *ngIf="cart.cart_items.length == 0">
    
    <div class="align-items-center d-flex flex-column gap-3 h-100 justify-content-center">
       

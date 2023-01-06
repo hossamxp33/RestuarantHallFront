@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { ITEMS_RESULTS_TYPE } from 'src/app/core/enums/items_result_type.enum';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
-import { MenuInterface, MenuItemInterface, ReservationDataInterface, TableInterface } from 'src/app/core/interfaces/orders.interface';
+import { ActiveTableInterface, MenuInterface, MenuItemInterface, ReservationDataInterface, TableInterface } from 'src/app/core/interfaces/orders.interface';
 import { SET_ACTIVE_CATEGORY_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION } from '../../store/orders.actions';
-import { ACTIVE_CATEGORY_SELECTOR, GET_ACTIVE_ORDER_SELECTOR, GET_ACTIVE_RESERVATION_SELECTOR, ITEMS_RESULTS_TYPE_SELECTOR, MENU_SELECTOR, SEARCHED_ITEMS_SELECTOR } from '../../store/orders.selectors';
+import { ACTIVE_CATEGORY_SELECTOR, GET_ACTIVE_TABLE_SELECTOR, ITEMS_RESULTS_TYPE_SELECTOR, MENU_SELECTOR, SEARCHED_ITEMS_SELECTOR } from '../../store/orders.selectors';
 
 @Component({
   selector: 'app-menu',
@@ -28,11 +28,23 @@ export class MenuComponent implements OnInit {
     id: 0
  };
 
- active_order: TableInterface = {
-  id: 0,
-  seats: 0,
-  number: 0 
- };
+ active_order: ActiveTableInterface = {
+  table: {
+     id: 0,
+     number: 0,
+     seats: 0,
+     isAvail: false,
+     orderId: 0,
+     waiterId: 0,
+     waiterName: "",
+     modified: ''
+  },
+  paymenttype: {
+     name: '',
+     id: 0
+  },
+  order_details: []
+};
 
  active_menu_index: number = 0;
 
@@ -179,15 +191,8 @@ export class MenuComponent implements OnInit {
   get_reservation_data()
   {
 
-    this.store.pipe( select(GET_ACTIVE_RESERVATION_SELECTOR) ).subscribe(
-      (reservation: ReservationDataInterface)=>{
-        this.reservation = reservation;
-      }
-    );
-
-
-    this.store.pipe( select(GET_ACTIVE_ORDER_SELECTOR) ).subscribe(
-      (active_order: TableInterface)=>{
+    this.store.pipe( select(GET_ACTIVE_TABLE_SELECTOR) ).subscribe(
+      (active_order: ActiveTableInterface)=>{
         this.active_order = active_order;
       }
     );

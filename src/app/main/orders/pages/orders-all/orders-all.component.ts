@@ -22,9 +22,14 @@ export class OrdersAllComponent implements OnInit {
     total: 0,
     sub_total: 0,
     table: {
-       id: 0,
-       number: 0,
-       seats: 0
+      id: 0,
+      number: 0,
+      seats: 0,
+      isAvail: false,
+      waiterId: 0,
+      waiterName: '',
+      orderId: 0,
+      modified: ''
     },
     paymenttype: {
       name: '--'

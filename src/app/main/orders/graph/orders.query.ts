@@ -6,11 +6,16 @@ import { environment } from "src/environments/environment";
 
 export const GET_HALL_TABLE_QUERY = gql`
   {
-    restables 
+    restables (Function: "tablesStatis")
     {
       id
       number
       seats
+      isAvail
+      waiterId
+      waiterName
+      orderId
+      modified
     }
   }
 `;
@@ -26,9 +31,23 @@ export const GET_MENU_QUERY = gql`
       menu_categories_items
       {
         id 
-        name
         photo
+        name
+        description
         price
+        menu_options_topics 
+        {
+          name
+          required
+          max_option_checks
+          menu_options 
+          {
+            id
+            name
+            price
+            menu_options_topics_id
+          }
+        }
       }
     }
   }`;
@@ -117,3 +136,16 @@ export const GET_CLIENT_BY_PHONE_NUMBER_QUERY = (client_number: string)=>{
   `;
 
 };
+
+
+
+export const GET_RESTAURANT_DATA =  gql`{
+  restaurants(id: ${environment.vendor_id}) {
+     id
+     name
+     logo
+     cover
+     taxes
+     service
+  }
+}`;

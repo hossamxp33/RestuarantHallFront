@@ -11,9 +11,10 @@
 {
     max-width: 600px;
     width: 100%;
-    height: 100vh;
+    height: 95vh;
     overflow-y: scroll;
     z-index: 11;
+    scrollbar-width: none;  /* Firefox */
 }
 
 
@@ -21,6 +22,7 @@
 .food-modal::-webkit-scrollbar 
 {
     width: 10px;
+    display: none;
 }
   
 /* Track */
@@ -61,6 +63,15 @@
 }
 
 
+.custom-control-input
+{
+    width: 20px;
+    height: 20px;
+}
+
+
+
+
 
 @media screen and (max-width: 992px)
 {
@@ -78,6 +89,7 @@
         max-width: 100%;
         overflow-y: auto;
         overflow-x: hidden;
+        border-radius: 0 !important;
     }
 
 

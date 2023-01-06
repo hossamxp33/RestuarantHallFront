@@ -17,6 +17,7 @@ import { OrderDetailComponent } from './pages/order-detail/order-detail.componen
 import { HallSectionComponent } from './components/hall-section/hall-section.component';
 import { DeliverySectionComponent } from './components/delivery-section/delivery-section.component';
 import { AddClientSectionComponent } from './components/add-client-section/add-client-section.component';
+import { FoodModalComponent } from "./components/food-modal/food-modal.component";
 
 
 
@@ -43,7 +44,8 @@ import { AddClientSectionComponent } from './components/add-client-section/add-c
       OrderDetailComponent,
       HallSectionComponent,
       DeliverySectionComponent,
-      AddClientSectionComponent
+      AddClientSectionComponent,
+      FoodModalComponent
   ],
    imports: [
       RouterModule.forChild(ORDERS_ROUTES),

@@ -4,8 +4,7 @@
 
 export interface AuthState
 {
-   user : UserInterface,
-   restautant_data: RestaurantDataInterface
+   user : UserInterface
 }
 
 
@@ -20,11 +19,3 @@ export interface UserInterface
    vendorId: string
 }
 
-
-export interface RestaurantDataInterface
-{
-   cover: string,
-   id: number,
-   logo: string,
-   name: string
-}

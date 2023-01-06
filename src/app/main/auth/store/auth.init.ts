@@ -7,12 +7,6 @@ export const Auth_STATES : AuthState  = {
       BranchId : '',
       token : '',
       vendorId : ''
-   },
-   restautant_data: {
-      cover: '',
-      id: 0,
-      logo: '',
-      name: ''
    }
 };  
 

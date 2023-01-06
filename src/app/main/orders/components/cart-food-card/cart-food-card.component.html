@@ -5,17 +5,17 @@
 <div class="card flex-row">
 
    <div>
-      <img src="{{ image_url + food_img }}" alt="{{ food_name }}">
+      <img src="{{ image_url + order.photo }}" alt="{{ order.name }}" width="80" height="80" class="item-img">
    </div>
 
-   <div class="d-flex flex-column justify-content-between me-2 my-2">
+   <div class="d-flex flex-column justify-content-between me-2 my-2" style="width: 115px;">
       <div>
-         <h1 class="fs-6 m-0 food-name">{{ food_name }}</h1>
-         <h2 class="m-0 food-size text-muted">{{ food_size }}</h2>
+         <h1 class="fs-6 m-0 food-name text-truncate">{{ order.name }}</h1>
+         <h2 class="m-0 food-size text-muted text-truncate" style="width: 90px;">{{ order.note }}</h2>
       </div>
 
       <div>
-         <p class="fs-6 m-0 food-price fw-bold">{{ food_price }} ر.س</p>
+         <p class="fs-6 m-0 food-price fw-bold">{{ order.total }} ج.م</p>
       </div>
    </div>
    
@@ -23,13 +23,13 @@
    <div class="d-flex flex-column justify-content-between ms-2 my-2">
    
       <div class="d-flex justify-content-end">
-         <img src="../../../../../assets/icons/Stroke_close.svg" alt="close button" width="14" height="14" class="close-btn">
+         <img src="../../../../../assets/icons/Stroke_close.svg" alt="close button" width="14" height="14" class="close-btn" (click)="delete_me(order.id);">
       </div>
 
       <div class="d-flex gap-2 align-items-center justify-content-center">
-         <div> <img src="../../../../../assets/icons/add_btn.svg" alt="add button" width="38" height="38" class="count-btn"> </div>
-         <div> <p class="m-0 food-count">1</p> </div>
-         <div> <img src="../../../../../assets/icons/remove_btn.svg" alt="remove button" width="38" height="38" class="count-btn"> </div>
+         <div> <img src="../../../../../assets/icons/add_btn.svg" alt="add button" width="38" height="38" class="count-btn" (click)="changed_my_quantity(order.id , 'plus');"> </div>
+         <div> <p class="m-0 food-count">{{ order.quantity }}</p> </div>
+         <div> <img src="../../../../../assets/icons/remove_btn.svg" alt="remove button" width="38" height="38" class="count-btn" (click)="changed_my_quantity(order.id, 'minus');"> </div>
       </div>
    
    </div>   

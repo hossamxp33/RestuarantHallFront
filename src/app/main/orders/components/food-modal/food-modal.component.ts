@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { AppStates } from 'src/app/core/interfaces/app.interface';
+import { MenuItemInterface, MenuItemTopicsOptionsInterface } from 'src/app/core/interfaces/orders.interface';
+import { environment } from 'src/environments/environment';
+import { ADD_ITEM_TO_CART_ACTION, TOGGLE_FOOD_MODAL_ACTION } from '../../store/orders.actions';
+import { GET_FOOD_MODAL_VISIBILITY_STATUS_SELECTOR, GET_SELECTED_FOOD_ITEM } from '../../store/orders.selectors';
 
 @Component({
   selector: 'app-food-modal',
@@ -19,28 +25,71 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   option: string = '';
   optionsId: any[] = [];
   rest_id : number = 0;
-  URL : string = '';
-  extra_price : number = 0;
   active_radio_btn : string = '';
-  is_modal_active : boolean = false;
   recycables : Subscription[] = [];
   form! : FormGroup;
   checked_meal_options : any[] = [];
   meal_topics : any[] = [];
   checkbox_available : boolean = true;
+  
+  
+  
+  
+  
+  
+  extra_price : number = 0;
   lang : string = localStorage.getItem('lang') || 'en';
+  img_url : string = environment.img_url + "/";
+  is_modal_active : boolean = false;
 
+  food_data: MenuItemInterface = {  // this is read-only
+    id: 0,
+    photo: "",
+    name: "",
+    description: "",
+    price: 0,
+    quantity: 1,
+    total: 0,
+    note: '',
+    selected_options: [],
+    menu_options_topics: []
+  };
 
-
-
-
+  new_food_data: MenuItemInterface = {    // make a copy to modify
+    id: 0,
+    photo: "",
+    name: "",
+    description: "",
+    price: 0,
+    quantity: 1,
+    total: 0,
+    note: '',
+    selected_options: [],
+    menu_options_topics: []
+  };
 
   
   constructor(
-  ) { }
+    private store: Store<AppStates>
+  ) {}
 
   ngOnInit(): void 
   {
+
+
+    // SUBSCRIBE TO TOGGLING VISIBILITY COMMAND
+    this.listen_to_toggle();
+
+    // GET MODAL FOOD DATA
+    this.get_food_data();
+
+
+
+
+
+
+
+
     // set food modal state
     this.sub_to_modal_status(); 
 
@@ -59,12 +108,59 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
 
 
+
+  listen_to_toggle()
+  {
+
+    this.store.pipe( select(GET_FOOD_MODAL_VISIBILITY_STATUS_SELECTOR) ).subscribe(
+      (response: boolean)=>{
+        this.is_modal_active = response;
+      }
+    );
+
+  }
+
+
+
+  get_food_data()
+  {
+    
+    this.store.pipe( select( GET_SELECTED_FOOD_ITEM ) ).subscribe(
+      (food_item: MenuItemInterface)=>{
+
+        this.food_data = food_item;
+
+        this.new_food_data = { ...this.food_data, total: this.food_data.price };
+
+      }
+    );
+
+  }
+
+
+
+  note_changed(input_event : any)
+  {
+
+    console.log(" 😼 : ", input_event.target.value);
+    this.new_food_data.note = input_event.target.value;
+
+
+  }
+
+
+
+
+
   sub_to_modal_status()
   {
 
 
 
   }
+
+
+
 
 
   sub_to_food_modal()
@@ -114,11 +210,11 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
     if (sign == '+') 
     {
-      this.qty++;
+      this.new_food_data.quantity++;
     }
-    else if ( sign == '-' && this.qty > 1)
+    else if ( sign == '-' && this.new_food_data.quantity > 1)
     {
-      this.qty--;
+      this.new_food_data.quantity--;
     }
 
     this.calculateTotalPrice();
@@ -132,14 +228,14 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   calculateTotalPrice() 
   {
 
-
+    
     // get options price for single meal
     this.extra_price = 0 ;
-    this.checked_meal_options.forEach((el : any)=>{ this.extra_price+= el.price; });
-
+    this.new_food_data.selected_options.forEach((el : any)=>{ this.extra_price+= el.price; });
+    
     // calculate total price
-    this.total_price = +( (this.base_price  + this.extra_price) * this.qty ).toFixed(2);
-
+    this.new_food_data.total = +( (this.new_food_data.price  + this.extra_price) * this.new_food_data.quantity ).toFixed(2);
+    
   }
 
 
@@ -149,7 +245,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   {
 
     // when first init of food modal and there is no options selected
-    if ( this.checked_meal_options.length == 0 )
+    if ( this.new_food_data.selected_options.length == 0 )
     {
       return false;
     }
@@ -161,7 +257,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
       let count_options_by_topic = 0;
       let ckeckbox_on = false;
 
-      this.checked_meal_options.forEach((el : any)=>{
+      this.new_food_data.selected_options.forEach((el : any)=>{
         
         if ( el.menu_options_topics_id == topic.id )
         {
@@ -228,13 +324,13 @@ export class FoodModalComponent implements OnInit , OnDestroy {
       {
         // console.log("option ✅: " , option);
   
-        this.checked_meal_options.push(option);
+        this.new_food_data.selected_options.push(option);
 
       }
       else  // unchecked
       {
 
-        this.checked_meal_options = this.checked_meal_options.filter((el : any , i : number)=>{
+        this.new_food_data.selected_options = this.new_food_data.selected_options.filter((el : any , i : number)=>{
           return el.id != option.id
         });
 
@@ -251,12 +347,12 @@ export class FoodModalComponent implements OnInit , OnDestroy {
       // this is radio
 
       // remove all radio options from meal options for this topic
-      this.checked_meal_options = this.checked_meal_options.filter((el : any)=>{
+      this.new_food_data.selected_options = this.new_food_data.selected_options.filter((el : any)=>{
         return el.menu_options_topics_id != topic.id;
       });
 
       // set radio option for this topic
-      this.checked_meal_options.push(option);
+      this.new_food_data.selected_options.push(option);
 
     }
 
@@ -270,119 +366,52 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   
 
 
-  order(item : any): void 
+  add_to_cart(): void 
   {
 
 
-    // console.log("🍌  :  " , item);
-
-    // get resturant id for selected meal
-    // this.rest_id = this.f_m_s.get_resturant_id(item);
-
-
-    // put all options names in a string (meal options)
-    Object.values(this.options).map((option) => 
-    {
+    // get
     
-      (option as Array<any>).forEach((el : any)=>{
-
-        this.optionsId.push({ menu_options_id: el.option_id });
-
-      });
-      
-    });
-
-
-    // filter order option array for order options id's array
-    let order_option_ids = this.checked_meal_options.map((el : any)=>{ return el.id });
-
-
-    // UPDATE PRICE
-    this.calculateTotalPrice();
-
-
-    // collect options in a string
-    let options_string_temp = this.checked_meal_options.map((el : any)=>{ return el.name });
-    let options_string = this.checked_meal_options.length == 0 ? 'none' : options_string_temp.join(', ');
-    
-
-    // collect order data
-    const order: any = {
-      optionsId: order_option_ids,
-      id: item.id,
-      restaurantID: this.rest_id,
-      name: item.name,
-      options: this.checked_meal_options,
-      totalPrice: this.total_price,
-      qty: this.qty,
-      option: options_string,
-      note: this.note,
-      menu_categories_itemId: item.id,
-      price: item.price
-    };
-
-
-    // console.log("food data send to cart 🍉: " , order );
-
-
     
     // check if required topics has been choosed
-    let req_fultilled : boolean = this.check_required_options(order);
+    let req_fultilled : boolean = this.check_required_options(this.new_food_data.selected_options);
 
 
     if ( req_fultilled )
     {
-      // this.store.dispatch(sideBarCart({ cartData: { imgSrc: this.URL + item.photo, name: item.name }, }) );
+
+      this.store.dispatch( ADD_ITEM_TO_CART_ACTION({ food_item: this.new_food_data }) );
+
       this.exit_food_modal();
+
     }
     else
     {
-      alert('⚠️ Please select required options!');
+      alert('⚠️لو سمحت اختار واحد من الاختيارات الالزامية!');
     }
 
 
 
-  }
-
-
-
-
-  resetModal(): void 
-  {
-    // reset values
-    this.qty = 1;
-    this.options = {};
-    this.total_price = 0;
-    this.option = '';
-    this.note = '';
-    this.checked_meal_options = [];
+ 
 
   }
 
 
-  exit_food_modal()
-  {
-    // this.f_m_s.set_active_status(false);
-
-    this.resetModal();
-  }
-
-
-
-
-  check_required_options(final_order : any) : boolean
+  check_required_options(selected_options : MenuItemTopicsOptionsInterface[]) : boolean
   {
 
 
+    let selected_options_ids = selected_options.map((option)=>{ return option.id; });
 
-    if (  this.modalContent.menu_options_topics  )  // if exist any topics
+
+    if (  this.new_food_data.menu_options_topics  )  // if exist any topics
     {
 
 
       // get array of arrays for req. topics
       let array_of_req_topics_options : any[] = [];
 
-      (this.modalContent.menu_options_topics as Array<any>).forEach((el : any)=>{
+      (this.new_food_data.menu_options_topics as Array<any>).forEach((el : any)=>{
 
         if ( el.required == 1 )
         {
@@ -390,8 +419,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
         }
 
       });
-
-      // console.log("🤠 : " , array_of_req_topics_options);
 
 
       
@@ -403,7 +430,7 @@ export class FoodModalComponent implements OnInit , OnDestroy {
         (topic.menu_options as Array<any>).forEach((option : any)=>{    // loop  -> options /of/ topic
  
 
-          (final_order.optionsId as Array<any>).forEach((selected_option : any)=>{
+          selected_options_ids.forEach((selected_option : any)=>{
             if ( option.id == selected_option )
             {
               topic_option_selected = true;
@@ -419,10 +446,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
       });
 
 
-
-
-      // console.log("🤠🤠 : ", topics_selected_status);
-      
       // loop through topics selected array and get final status of selecting req. topics
       let final_order_selection_status : boolean = true;
       
@@ -433,9 +456,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
         }
 
       });
-
-
-      // console.log("🤠🤠🤠 : ", final_order_selection_status);
 
 
       // final result
@@ -451,19 +471,52 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
 
 
-
   modal_overlay_clicked(clicked_el : any)
   {
 
     if ( clicked_el.target == clicked_el.currentTarget )  // to target only the parent element
     {
-      // console.log('clicked')
-
       this.exit_food_modal();
-
     }
 
   }
+
+
+  exit_food_modal()
+  {
+
+    // close food modal
+    this.store.dispatch( TOGGLE_FOOD_MODAL_ACTION({ visibility_status: false }) );
+
+    // reset modal to initial value
+    this.resetModal();
+
+  }
+
+
+  resetModal(): void 
+  {
+    
+    // reset values
+    this.new_food_data = {
+      id: 0,
+      photo: "",
+      name: "",
+      description: "",
+      price: 0,
+      quantity: 1,
+      total: 0,
+      note: '',
+      selected_options: [],
+      menu_options_topics: []
+    };
+
+  }
+
+
+
+
+
 
 
 

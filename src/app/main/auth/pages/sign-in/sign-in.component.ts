@@ -82,7 +82,7 @@ export class SignInComponent implements OnInit {
       },
       (err)=>{
         
-        alert("username or password is incorrect!");
+        alert("⚠️اسم المستخدم أو كلمة المرور غير صحيحة!");
 
       }
     );

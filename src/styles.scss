@@ -27,6 +27,7 @@
    --color-2: #fff;
    --color-3: #f2f2f2;
    --color-4: #E48434;
+   --primary-color: #ff9e4d;
 
 }
 
@@ -74,4 +75,128 @@ html, body
 .cursor-pointer
 {
    cursor: pointer;
+}
+
+
+.modal-header .close:not(:disabled):not(.disabled):hover {
+   background-color: #dd3333;
+   opacity: 1;
+}
+.modal-content {
+border-radius: 8px;
+border: 0;
+}
+.modal-header.modal-bg {
+position: relative;
+padding: 120px 0;
+background-size: cover;
+background-position: center;
+border: 0;
+border-radius: 8px 8px 0 0;
+-webkit-box-pack: end;
+-ms-flex-pack: end;
+justify-content: flex-end;
+-webkit-box-align: start;
+-ms-flex-align: start;
+align-items: flex-start;
+}
+.modal-header.modal-bg .close-btn {
+position: absolute;
+top: 20px;
+right: 20px;
+}
+.modal-header.modal-bg {
+background-size: contain;
+background-repeat: no-repeat;
+background-color: #1d2228;
+}
+.modal-body {
+padding: 20px;
+}
+
+.customize-title {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.btn-outline-secondary {
+   height: 40px;
+   font-weight: 600;
+   border: 1px solid #363148;
+   border: 1px solid var(--secondary-color);
+   background: white;
+   color: #363148;
+   color: var(--secondary-color);
+   transition: all .3s;
+}
+
+.qty {
+   display: flex;
+}
+
+.qty input {
+   background-color: #fff;
+   border: 0;
+   outline: none;
+   width: 50px;
+   height: 40px;
+   text-align: center;
+   font-weight: 600;
+   border: 1px solid rgba(0,0,0,.1);
+}
+
+.qty span {
+   cursor: pointer;
+   width: 40px;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   border: 1px solid rgba(0,0,0,.1);
+   font-size: 13px;
+   background-color: #fff;
+}
+
+.qty span.qty-subtract {
+   border-right: 0;
+   border-radius: 25px 0 0 25px;
+}
+
+.qty span.qty-add {
+   border-left: 0;
+   border-radius: 0 25px 25px 0;
+}
+
+
+
+.food-modal-text-note
+{
+   margin-bottom: 48px;
+
+}
+
+.food-modal-text-note textarea
+{
+   height: 100%;
+   max-width: 100%;
+   height: auto;
+   min-height: 32px;
+   line-height: 1.5715;
+   vertical-align: bottom;
+   transition: all .3s,height 0s;
+   resize: none;
+}
+
+
+.red
+{
+   color: #cf1322;
+   border-color: #ffa39e !important;
+}
+
+.geekblue
+{
+   color: #1d39c4;
+   background: #f0f5ff;
+   border-color: #adc6ff !important;
 }

@@ -29,7 +29,10 @@
    
       <!-- body -->
       <div class="food-card-box h-100 pb-5 px-2 row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
-         <app-food-card *ngFor="let category of ( results_type == 1 ? active_category?.menu_categories_items : search_results_for_items);" [category]="category"></app-food-card>
+         <app-food-card 
+         *ngFor="let item of ( results_type == 1 ? active_category?.menu_categories_items : search_results_for_items);" 
+         [food]="item">
+         </app-food-card>
       </div>
 
    </div>
@@ -43,7 +46,7 @@
 
          <div class="d-flex flex-row-reverse justify-content-between">
             <div>
-               <h1 class="m-0 header-title fw-bold">طلب #{{ reservation.id || 0 }}</h1>
+               <h1 class="m-0 header-title fw-bold">طلب #{{ active_order.table.orderId || 0 }}</h1>
             </div>
    
             <div class="d-flex justify-content-center align-items-center">
@@ -55,12 +58,12 @@
 
             <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
                <img src="../../../../../assets/icons/table_icon.svg" alt="home icon" width="20" height="20">
-               <h1 class="title-txt tab-title m-0">طاولة: <span>{{ active_order.number || 0 }}</span></h1>
+               <h1 class="title-txt tab-title m-0">طاولة: <span>{{ active_order.table.number || 0 }}</span></h1>
             </div>
    
             <div class="align-items-center d-flex flex-row-reverse gap-2 justify-content-center">
                <img src="../../../../../assets/icons/people_light.svg" alt="home icon" width="20" height="20">
-               <h1 class="title-txt tab-title m-0">الضيوف: <span>{{ active_order.seats || 0 }}</span></h1>
+               <h1 class="title-txt tab-title m-0">الضيوف: <span>{{ active_order.table.seats || 0 }}</span></h1>
             </div>
    
          </div>

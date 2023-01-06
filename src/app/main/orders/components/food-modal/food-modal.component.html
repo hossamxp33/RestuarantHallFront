@@ -1,0 +1,167 @@
+
+
+
+
+<div 
+*ngIf="is_modal_active" 
+class="align-items-center d-flex food-modal-box justify-content-center overflow-hidden position-fixed start-50 top-50 translate-middle w-100 h-100" 
+(click)="modal_overlay_clicked($event)"
+>
+
+
+  
+  <div class="bg-white food-modal position-relative rounded-5 shadow-lg">
+
+    
+    <!-- close btn -->
+    <button (click)="exit_food_modal()" type="button" class="bg-light border border-3 btn-close end-0 fs-6 me-3 mt-3 opacity-100 p-2 position-absolute rounded-5 top-0 shadow-none" aria-label="Close" style="z-index: 99;"></button>
+
+    <!-- cover-img -->
+    <div class="border-1 border-bottom border-dark food-modal-img-box modal-bg modal-header p-0 rounded-0">
+      <img src="{{ food_data.photo ? img_url + food_data.photo : '../../../../../../../assets/icons/imae_placeholder.png' }}" class="w-100 h-100">
+    </div>
+    
+    <div class="modal-body px-5" style="overflow-x: hidden;">
+
+
+
+      <!-- title -->
+      <div class="customize-meta border-bottom-0 mb-0 food-modal-title-box pb-2">
+
+
+        <div class="d-flex justify-content-between dir-rtl">
+          <h4 class="customize-title fs-2 fw-bold mb-0">  
+            {{ new_food_data.name }}
+          </h4>
+          
+          <div class="align-items-center bg-danger d-flex flex-column justify-content-between p-3 rounded-circle text-center text-uppercase text-white" style="width: 70px; height: 70px;">
+            <p class="m-0 p-0">{{"إجمالي"}}</p>
+            <p class="m-0 p-0 fw-bold" style="color: var(--primary-color); margin-top: -5px !important;">{{ new_food_data.total }}</p>
+          </div>
+        </div>
+
+        <p class="d-block dir-rtl mt-2 text-end w-100">{{ new_food_data.description }}</p>
+
+      </div>
+
+
+      <div class="d-flex justify-content-between border-top-0 customize-controls food-modal-price-box flex-row-reverse pt-0 pb-1 pb-lg-3">
+
+        <!-- counter -->
+        <div class="qty h5">
+
+          <span (click)="changeQty('-')" class="qty-subtract" style="color: var(--primary-color); cursor: pointer;background: var(--primary-color); border-color: var(--primary-color);">
+            <img src="../../../../../assets/icons/minus.png" alt="decrease price" width="25" height="25" class="user-select-none">
+          </span>
+
+          <input style="border-color: var(--primary-color);" class="user-select-none" type="text" name="qty" [value]="new_food_data.quantity" onfocus="blur()" />
+
+          <span (click)="changeQty('+')" class="qty-add" style="color: var(--primary-color); cursor: pointer;background: var(--primary-color); border-color: var(--primary-color);">
+            <img src="../../../../../assets/icons/plus.png" alt="increase price" width="25" height="25" class="user-select-none">
+          </span>
+
+        </div>
+
+        <!-- price -->
+        <div class="customize-total">
+          <div class="d-flex flex-column w-700 gap-1 h4 total-Price">
+
+            <div class="align-items-center d-flex gap-1 h4 total-Price w-700" style="line-height: 1;"  *ngIf="new_food_data.price != 0">
+              <span class="mb-2 user-select-none"> {{"ج.م"}} </span>
+              <span class="final-price" style="color: var(--primary-color);">{{ new_food_data.price }} </span>
+            </div>
+            
+            <span class="fs-6 fw-bold text-muted" *ngIf="new_food_data.price == 0"> * {{"يعتمد السعر على الاختيارات"}} </span>
+          
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="customize-variations">
+        <div class="row">
+
+          <!-- options  -->
+          <div class="col-lg-4 col-12 w-100" *ngFor="let topic of new_food_data?.menu_options_topics" style="background-color: white;">
+
+            <!-- single topic -->
+            <div class="customize-variation-wrapper w-100 p-0" style="background-color: white;">
+
+              <h5 class="align-items-center d-flex fw-700 h4 justify-content-between dir-rtl">
+                
+                <!-- name -->
+                <span class="text-capitalize m-0 p-0 fw-bold fs-4">{{ topic?.name }}</span>
+                
+                <!-- required stat -->
+                <div class="me-0 fw-bold" class="red border border-1 fs-6 fw-bold px-2 rounded" *ngIf="topic?.required">
+                  {{"الزامي"}}
+                </div>
+                <div class="me-0 fw-bold" class="border border-1 fs-6 fw-bold geekblue px-2 rounded" *ngIf="!(topic?.required)">
+                  {{"اختياري"}}
+                </div>
+              
+              </h5>
+
+              <!-- START : single option -->
+              <div class="customize-variation-item dir-rtl" *ngFor="let option of topic?.menu_options">
+
+                <div 
+                class="align-items-center custom-control flex-row d-flex w-100 food-modal-spec-box dir-rtl gap-2" 
+                [ngClass]=" 'custom-' + (topic.max_option_checks > 1 ? 'checkbox' : 'radio') "
+                >
+                  
+                  <input
+                    [type]="topic.max_option_checks > 1 ? 'checkbox' : 'radio'"
+                    [id]="option?.id" 
+                    [name]="topic.max_option_checks > 1 ? option?.name : topic?.name"
+                    [value]="option?.price"
+                    [disabled]="disabledOption(topic, option)"
+                    class="custom-control-input"
+                    (change)="changeOptions($event, option, topic )"
+                  />
+
+                  <div class="align-items-center d-flex justify-content-between price w-100">
+
+                    <label class="custom-control-label fs-5 mb-0 ms-2 fw-bold text-truncate food-modal-spec-title" [for]="option.name + 1">
+                      {{ option?.name }}
+                    </label>
+
+                    <span class="fs-4 fw-bold" style="color: var(--primary-color);">+{{ option?.price }}</span>
+
+                  </div>
+
+                </div>
+
+              </div>
+              <!-- END : single option types -->
+
+            </div>
+
+          </div>
+
+
+          <!-- note -->
+          <label class="col-md-12 fw-700 h5 mt-3 fw-bold dir-rtl" for="textarea_note">{{ 'ملاحظات :' }}</label>
+          <div class="col-md-12 food-modal-text-note">
+            <textarea id="textarea_note" name="note" rows="3" maxlength="200" class="dir-rtl p-2 rounded-4 w-100" (input)="note_changed($event);"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <!-- order btn -->
+      <button class="border-0 btn-block btn-outline-secondary fs-6 rounded-2 text-white w-100 order-btn" style="background: var(--primary-color);"
+        (click)="add_to_cart()">
+        {{ 'اضف الي العربة' }}
+      </button>
+
+    </div>
+
+
+  </div>
+
+
+</div>

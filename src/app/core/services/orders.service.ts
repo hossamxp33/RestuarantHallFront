@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { TableInterface } from "../interfaces/orders.interface";
+import { CartOrdersInterface, TableInterface } from "../interfaces/orders.interface";
 
 
 
@@ -25,10 +25,23 @@ export class OrdersService
    {
       return this.http.post(`${environment.base_url}/orders/addForHall` , 
          {
-            table_id : table.id
+            table_id : table.id,
+            order_type_id: 2
          }
       );
    }
+
+
+   edit_order_by_id(order_id : number , order_details: CartOrdersInterface[], order_total: number)
+   {
+      return this.http.post(`${environment.base_url}/orders/edit/${order_id}` , 
+      {
+         branch_id: environment.branch_id,
+         order_details: order_details,
+         total: order_total
+      });
+   }
+
 
 
 }

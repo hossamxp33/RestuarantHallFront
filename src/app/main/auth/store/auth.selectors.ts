@@ -13,7 +13,3 @@ export const USER_SELECTOR = createSelector(
 );
 
 
-export const RESTAURANT_DATA_SELECTOR = createSelector(
-   (app_state: AppStates)=> app_state.auth,
-   (auth_state: AuthState)=> auth_state.restautant_data
-);
