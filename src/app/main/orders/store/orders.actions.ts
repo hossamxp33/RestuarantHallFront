@@ -8,12 +8,10 @@ export const LOAD_ALL_TABLES_ACTION = createAction(
    "[hall resolver] load all tables data"
 );
 
-
 export const TABLES_LOADED_ACTION = createAction(
    "[hall effect] tables data loaded",
    props<{ tables: TableInterface[] }>()
 );
-
 
 export const SET_ACTIVE_TABLE_ACTION = createAction(
    "[table controller] setting active table",
@@ -110,12 +108,10 @@ export const EDIT_ORDER_ACTION = createAction(
    props<{ order: EditOrderInterface }>()
 );
 
-
 export const TOGGLE_FOOD_MODAL_ACTION = createAction(
    "[food modal controller] toggling modal visibility",
    props<{ visibility_status: boolean }>()
 );
-
 
 export const SET_ACTIVE_FOOD_ITEM_ACTION = createAction(
    "[food card controller] setting active food item",
@@ -131,7 +127,6 @@ export const DELETE_CART_ITEM_ACTION = createAction(
    "[card food cart controller] deleting cart item",
    props<{ item_id: number }>()
 );
-
 
 export const CHANGED_CART_ITEM_QUANTITY_ACTION = createAction(
    "[card food cart controller] changed cart item quantity",
@@ -162,4 +157,8 @@ export const UPDATE_CART_ITEM_TOTAL_ACTION = createAction(
 
 export const RESET_ALL_ORDER_STATE_ACTION = createAction(
    "[auth effect/sign-out] reset all orders state"
+);
+
+export const GET_TABLE_ORDER_CART_ITEMS_ACTION = createAction(
+   "[orders effects] getting table order cart items"
 );

@@ -316,7 +316,7 @@ export class HallEffects implements OnInit
          return this.actions$.pipe( ofType(GET_TABLE_ORDER_CART_ITEMS_ACTION) , tap(
             ()=>{
 
-               this.query_s.query(  );
+               // this.query_s.query(  );
 
 
             }
