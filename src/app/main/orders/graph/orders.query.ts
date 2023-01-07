@@ -149,4 +149,4 @@ export const GET_RESTAURANT_DATA =  gql`{
 }`;
 
 
-export const GET_TABLE_ORDER_CART_ITEMS_QUERY = gql``
+// export const GET_TABLE_ORDER_CART_ITEMS_QUERY = gql``

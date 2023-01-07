@@ -310,21 +310,19 @@ export class HallEffects implements OnInit
    );
 
 
-   get_table_order_cart_items$ = createEffect(
-      ()=>{
+   // get_table_order_cart_items$ = createEffect(
+   //    ()=>{
 
-         return this.actions$.pipe( ofType(GET_TABLE_ORDER_CART_ITEMS_ACTION) , tap(
-            ()=>{
-
-               // this.query_s.query(  );
+   //       return this.actions$.pipe( ofType(GET_TABLE_ORDER_CART_ITEMS_ACTION) , tap(
+   //          ()=>{
 
 
-            }
-         ))
+   //          }
+   //       ))
 
-      },
-      { dispatch: false }
-   );
+   //    },
+   //    { dispatch: false }
+   // );
 
    
    loading_restaurant_data$ = createEffect(
