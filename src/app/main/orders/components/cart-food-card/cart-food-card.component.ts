@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
-import { MenuItemInterface } from 'src/app/core/interfaces/orders.interface';
+import { CartItemInterface, MenuItemInterface } from 'src/app/core/interfaces/orders.interface';
 import { environment } from 'src/environments/environment';
 import { CHANGED_CART_ITEM_QUANTITY_ACTION, DELETE_CART_ITEM_ACTION } from '../../store/orders.actions';
 
@@ -13,7 +13,7 @@ import { CHANGED_CART_ITEM_QUANTITY_ACTION, DELETE_CART_ITEM_ACTION } from '../.
 export class CartFoodCardComponent implements OnInit {
 
 
-  @Input('order') order :  MenuItemInterface = {
+  @Input('order') order :  CartItemInterface = {
     id: 0,
     photo: "",
     name: "",
@@ -22,8 +22,7 @@ export class CartFoodCardComponent implements OnInit {
     quantity: 1,
     total: 0,
     note: '',
-    selected_options: [],
-    menu_options_topics: []
+    selected_options: []
   };
 
   image_url : string = environment.img_url + "/";

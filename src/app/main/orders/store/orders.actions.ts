@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { ClientInterface, EditOrderInterface, FullOrderDetailsInteface, MenuInterface, MenuItemInterface, OrderInterface, ReservationDataInterface, RestaurantDataInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
+import { CartItemInterface, ClientInterface, EditOrderInterface, FullOrderDetailsInteface, MenuInterface, MenuItemInterface, OrderInterface, ReservationDataInterface, RestaurantDataInterface, TableInterface } from "src/app/core/interfaces/orders.interface";
 
 
 
@@ -120,7 +120,7 @@ export const SET_ACTIVE_FOOD_ITEM_ACTION = createAction(
 
 export const ADD_ITEM_TO_CART_ACTION = createAction(
    "[food modal controller] add item to cart",
-   props<{ food_item: MenuItemInterface }>()
+   props<{ food_item: CartItemInterface }>()
 );
 
 export const DELETE_CART_ITEM_ACTION = createAction(

@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { AppStates } from 'src/app/core/interfaces/app.interface';
-import { MenuItemInterface, MenuItemTopicsOptionsInterface } from 'src/app/core/interfaces/orders.interface';
+import { CartItemInterface, MenuItemInterface, MenuItemTopicsOptionsInterface } from 'src/app/core/interfaces/orders.interface';
 import { environment } from 'src/environments/environment';
 import { ADD_ITEM_TO_CART_ACTION, TOGGLE_FOOD_MODAL_ACTION } from '../../store/orders.actions';
 import { GET_FOOD_MODAL_VISIBILITY_STATUS_SELECTOR, GET_SELECTED_FOOD_ITEM } from '../../store/orders.selectors';
@@ -84,19 +84,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
     this.get_food_data();
 
 
-
-
-
-
-
-
-    // set food modal state
-    this.sub_to_modal_status(); 
-
-    // listen to food modal
-    this.sub_to_food_modal();
-    
-
   }
 
   
@@ -149,60 +136,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
   }
 
 
-
-
-
-  sub_to_modal_status()
-  {
-
-
-
-  }
-
-
-
-
-
-  sub_to_food_modal()
-  {
-
-    // return this.f_m_s.get_modal_data().subscribe(
-    //   (data : any)=>{
-
-
-    //     // check for initial subscription
-    //     if (  Object.keys(data).length != 0 )
-    //     {
-
-    //       // set modal data
-    //       this.modalContent = data;
-
-    //       // set topics data
-    //       if ( this.modalContent.menu_options_topics && ( <Array<any>> this.modalContent.menu_options_topics).length != 0 )
-    //       {
-    //         // meal topics exist
-    //         this.meal_topics = ( <Array<any>> this.modalContent.menu_options_topics).map((el : any)=>{
-    //           return { id : el.id , max_options_number : el.max_option_checks , name : el.name };
-    //         });
-
-    //       }
-
-    //       // console.log("⚠️ modal data : " , this.modalContent);
-    //       // console.log("⚠️ modal topics : " , this.meal_topics);
-
-
-    //       // set seperate data varibles for calc
-    //       this.qty = 1;
-    //       this.base_price = this.modalContent.price;
-    //       this.total_price = this.base_price;
-
-    //     }
-
-    //   }
-    // );
-
-
-  }
 
 
   changeQty(sign: string) 
@@ -380,7 +313,16 @@ export class FoodModalComponent implements OnInit , OnDestroy {
     if ( req_fultilled )
     {
 
-      this.store.dispatch( ADD_ITEM_TO_CART_ACTION({ food_item: this.new_food_data }) );
+      
+      // format object to be used in cart (remove topics property)
+      let temp : any = { ...this.new_food_data };
+      delete temp.menu_options_topics;
+
+      let cart_item_format : CartItemInterface = temp;
+
+      
+
+      this.store.dispatch( ADD_ITEM_TO_CART_ACTION({ food_item: cart_item_format }) );
 
       this.exit_food_modal();
 

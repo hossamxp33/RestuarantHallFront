@@ -57,6 +57,18 @@ export interface MenuItemInterface
    menu_options_topics: MenuItemTopicsInterface[]
 }
 
+export interface CartItemInterface
+{
+   id: number,
+   name: string,
+   photo: string,
+   price: number,
+   description: string,
+   quantity: number,
+   total: number,
+   note: string,
+   selected_options: MenuItemTopicsOptionsInterface[]
+}
 
 export interface MenuItemTopicsInterface
 {
@@ -168,7 +180,7 @@ export interface ActiveTableInterface
 
 export interface CartInterface
 {
-   cart_items: MenuItemInterface[],
+   cart_items: CartItemInterface[],
    sub_total: number,
    total: number
 }
