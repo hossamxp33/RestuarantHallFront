@@ -338,6 +338,18 @@ export class HallEffects implements OnInit
 
             (action)=>{
 
+
+               // loop the cart items of order on table and add them to cart 
+               // this is for triggering other calculative actions
+               action.order_details.forEach(
+                  (cart_item)=>{
+                  
+                     this.store.dispatch( ADD_ITEM_TO_CART_ACTION({ food_item: cart_item }) );
+
+                  }
+               );
+
+
                // redirect to menu view
                this.router.navigateByUrl('/orders/menu');
                

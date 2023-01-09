@@ -320,7 +320,6 @@ export class FoodModalComponent implements OnInit , OnDestroy {
 
       let cart_item_format : CartItemInterface = temp;
 
-      
 
       this.store.dispatch( ADD_ITEM_TO_CART_ACTION({ food_item: cart_item_format }) );
 
