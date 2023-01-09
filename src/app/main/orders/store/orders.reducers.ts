@@ -2,7 +2,7 @@
 
 import { createReducer, on, Store } from "@ngrx/store";
 import { CartItemInterface, MenuItemInterface, OrdersState } from "src/app/core/interfaces/orders.interface";
-import { ADD_ITEM_TO_CART_ACTION, ALL_ORDERS_LOADED_ACTION, CHANGED_CART_ITEM_QUANTITY_ACTION, DELETE_CART_ITEM_ACTION, MENU_LOADED_ACTION, RESET_ALL_ORDER_STATE_ACTION, RESTAURANT_DATA_LOADED_ACTION, SAVE_ACTIVE_ORDER_DATA_ACTION, SAVE_CLIENTS_RESULTS_ACTION, SAVE_ORDER_DETAILS_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SET_ACTIVE_CATEGORY_ACTION, SET_ACTIVE_FOOD_ITEM_ACTION, SET_ACTIVE_TABLE_ACTION, SET_HOME_VIEW_MODE_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION, TABLES_LOADED_ACTION, TOGGLE_FOOD_MODAL_ACTION, UPDATE_CART_ITEM_TOTAL_ACTION, UPDATE_CART_SUB_TOTAL_ACTION, UPDATE_CART_TOTAL_ACTION } from "./orders.actions";
+import { ADD_ITEM_TO_CART_ACTION, ALL_ORDERS_LOADED_ACTION, CHANGED_CART_ITEM_QUANTITY_ACTION, DELETE_CART_ITEM_ACTION, MENU_LOADED_ACTION, RESET_ALL_ORDER_STATE_ACTION, RESTAURANT_DATA_LOADED_ACTION, SAVE_ACTIVE_ORDER_DATA_ACTION, SAVE_CLIENTS_RESULTS_ACTION, SAVE_ORDER_DETAILS_ACTION, SEARCHED_ITEM_COMPLETE_ACTION, SET_ACTIVE_CATEGORY_ACTION, SET_ACTIVE_FOOD_ITEM_ACTION, SET_ACTIVE_TABLE_ACTION, SET_HOME_VIEW_MODE_ACTION, SET_SEARCH_RESULTS_TYPE_ACTION, SET_TABLE_ORDER_CART_ITEMS_ACTION, TABLES_LOADED_ACTION, TOGGLE_FOOD_MODAL_ACTION, UPDATE_CART_ITEM_TOTAL_ACTION, UPDATE_CART_SUB_TOTAL_ACTION, UPDATE_CART_TOTAL_ACTION } from "./orders.actions";
 import { ORDERS_STATES } from "./orders.init";
 
 
@@ -291,15 +291,6 @@ export const ORDERS_REDUCERS = createReducer(
    on(
       UPDATE_CART_ITEM_TOTAL_ACTION,
       (state, action)=>{
-
-         // // get options price for single meal
-         // this.extra_price = 0 ;
-         // this.new_food_data.selected_options.forEach((el : any)=>{ this.extra_price+= el.price; });
-         
-         // // calculate total price
-         // this.new_food_data.total = +( (this.new_food_data.price  + this.extra_price) * this.new_food_data.quantity ).toFixed(2);
-
-
          
          let temp_1: CartItemInterface[]  = [ ...state.cart.cart_items ];
          let temp_2: CartItemInterface[] = [];
@@ -416,6 +407,24 @@ export const ORDERS_REDUCERS = createReducer(
             ...state,
             ...ORDERS_STATES
          };
+
+         return new_state;
+      }
+   ),
+   on(
+      SET_TABLE_ORDER_CART_ITEMS_ACTION,
+      (state, action)=>{
+
+         let new_state = {
+            ...state,
+            active_table: {
+               ...state.active_table,
+               order_details: action.order_details
+            }
+         
+         };
+
+
 
          return new_state;
       }

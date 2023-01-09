@@ -149,4 +149,31 @@ export const GET_RESTAURANT_DATA =  gql`{
 }`;
 
 
-// export const GET_TABLE_ORDER_CART_ITEMS_QUERY = gql``
+export const GET_TABLE_ORDER_CART_ITEMS_QUERY = (order_id: number)=>{
+    return gql`{
+    orderDetails ( orderId: ${order_id} ) 
+    {
+      amount
+      total
+      notes
+      menu_categories_items {
+        id
+        photo
+        name
+        description
+        price 
+      }
+      order_details_options{
+            menu_options{
+              id
+              name
+              price
+              menu_options_topics_id
+
+            }
+      }
+    }
+
+
+  }`
+};

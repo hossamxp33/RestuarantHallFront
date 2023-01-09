@@ -174,7 +174,7 @@ export interface ActiveTableInterface
 {
    table: TableInterface
    paymenttype: PaymentTypeInterface,
-   order_details: CartOrdersInterface[]
+   order_details: CartItemInterface[]
 }
 
 

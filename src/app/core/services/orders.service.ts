@@ -26,10 +26,11 @@ export class OrdersService
       return this.http.post(`${environment.base_url}/orders/addForHall` , 
          {
             table_id : table.id,
-            order_type_id: 2
+            order_type_id: 2     // order in hall 
          }
       );
    }
+
 
 
    edit_order_by_id(order_id : number , order_details: CartOrdersInterface[], order_total: number)

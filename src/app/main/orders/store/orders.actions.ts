@@ -160,5 +160,11 @@ export const RESET_ALL_ORDER_STATE_ACTION = createAction(
 );
 
 export const GET_TABLE_ORDER_CART_ITEMS_ACTION = createAction(
-   "[orders effects] getting table order cart items"
+   "[orders effects] getting table order cart items",
+   props<{ order_id: number }>()
 );
+
+export const SET_TABLE_ORDER_CART_ITEMS_ACTION = createAction(
+   "[orders effects] save table order cart items",
+   props<{ order_details: CartItemInterface[] }>()
+); 
