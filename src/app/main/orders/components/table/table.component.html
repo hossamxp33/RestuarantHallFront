@@ -1,7 +1,14 @@
 
 
 
-<div class="align-items-center col d-flex justify-content-center h-100 p-3 position-relative table-box" (click)="table_clicked();">
-   <span class="fs-4 fw-bold position-absolute start-50 top-50 translate-middle table-number">{{ table.number }}</span>
-   <img src="{{ table.seats | table_kind }}" alt="table" class="img-fluid table-img" [ngClass]="{ 'table-seats-2' : table.seats == 2 }">
+<div class="align-items-center col d-flex flex-column h-100 justify-content-center p-3 table-box" 
+(click)="table_clicked();">
+   <p class="align-items-center d-flex justify-content-center text-center gap-1" *ngIf="!table.isAvail"> 
+      <span style="white-space: nowrap;"> {{ table.waiterName || "النادل" }} </span>
+      <span class="fw-bold text-danger"> ({{ table.orderId }}) </span>
+   </p>
+   <div class="position-relative table-inner-box">
+      <span class="fs-4 fw-bold position-absolute start-50 top-50 translate-middle table-number">{{ table.number }}</span>
+      <img src="{{ table.seats | table_kind }}" alt="table" class="img-fluid table-img" [ngClass]="{ 'table-seats-2' : table.seats == 2 }">
+   </div>
 </div>

@@ -13,14 +13,14 @@
    max-height: 170px;
 }
 
-.table-box
+.table-box 
 {
 
    min-width: 140px;
    min-height: 140px;
 }
 
-.table-box:hover
+.table-box .table-inner-box:hover
 {
    animation-name: table_display;
    animation-duration: 1.3s;
